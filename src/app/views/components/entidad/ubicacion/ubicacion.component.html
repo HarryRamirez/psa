@@ -1,0 +1,435 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="py-3 col-md-10">
+        <p>
+          Ahora diligencie toda la información relacionada con su proyecto. Al
+          dar clic en el botón “Agregar Municipio” podrá agregar uno a uno los
+          Municipios que hacen parte de su proyecto.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="py-2">
+        <h3 class="title-color my-2">Ubicación</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="row">
+            <h3 class="title-color mt-2">
+              Municipios donde se encuentra el Proyecto
+            </h3>
+            <p class="card-text">
+              Recuerde que todos los campos deben diligenciados, si en uno de
+              ellos no aplica registre el número cero (0).
+            </p>
+          </div>
+          <br />
+
+          <div
+            *ngIf="etapaProyecto == 'inversion'; else preinversion"
+            id="formInversion"
+          >
+            <form #formUbicacion="ngForm">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">10. Departamento *</label>
+                    <select
+                      name="departamento"
+                      id="selectDepartamento"
+                      ngModel
+                      class="form-control form-select"
+                      (change)="changeDepto($event)"
+                      required
+                    >
+                      <option value="" selected disabled hidden>Escoger</option>
+                      <option
+                        *ngFor="let departamento of listaDepartamentos"
+                        [value]="departamento.codigo"
+                      >
+                        {{ departamento.nombre }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">11. Municipio *</label>
+                    <select
+                      name="municipio"
+                      id="selectMunicipio"
+                      ngModel
+                      class="form-control form-select"
+                      (change)="changeMunicipio($event)"
+                      required
+                    >
+                      <option value="" selected disabled hidden>Escoger</option>
+                      <option
+                        *ngFor="let municipio of listaMunicipios"
+                        [value]="municipio.codigo"
+                      >
+                        {{ municipio.nombre }}
+                      </option>
+                    </select>
+                    <span *ngIf="displaySpanError" class="form-text text-danger"
+                      >Selecciona un Municipio válido</span
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">12. Hectáreas en Restauración Bajo PSA</label>
+                    <input
+                      type="number"
+                      name="area_psa_restauracion"
+                      class="form-control"
+                      placeholder="Ej: 1234567"
+                      [(ngModel)]="datoAgregar.area_psa_restauracion"
+                      (input)="setTotalHectareasPSA()"
+                      (keypress)="validarNumeros($event)"
+                      pattern="[0-9]"
+                      min="0"
+                      step="1"
+                      required
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">13. Hectáreas en Preservación Bajo PSA</label>
+                    <input
+                      type="number"
+                      name="area_psa_preservacion"
+                      class="form-control"
+                      placeholder="Ej: 1234567"
+                      [(ngModel)]="datoAgregar.area_psa_preservacion"
+                      (input)="setTotalHectareasPSA()"
+                      (keypress)="validarNumeros($event)"
+                      pattern="[0-9]"
+                      min="0"
+                      step="1"
+                      required
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="" class="readOnlyField"
+                      >14. Hectáreas Totales Bajo PSA
+                    </label>
+                    <input
+                      type="number"
+                      name="hectareas_psa"
+                      class="form-control"
+                      placeholder="Ej: 123456"
+                      [ngModel]="datoAgregar.hectareas_psa | number: '2.0-0'"
+                      required
+                      readonly
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">15. Familias Beneficiadas</label>
+                    <input
+                      type="number"
+                      name="num_familias_beneficiadas"
+                      class="form-control"
+                      placeholder="Ej. 10"
+                      [(ngModel)]="datoAgregar.num_familias_beneficiadas"
+                      (keypress)="validarNumeros($event)"
+                      min="0"
+                      step="1"
+                      pattern="[0-9]"
+                      required
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">16. Costo de Oportunidad ($/ha/año)</label>
+                    <input
+                      type="number"
+                      name="costo_oportunidad"
+                      class="form-control"
+                      placeholder="Ej: 1234567"
+                      [(ngModel)]="datoAgregar.costo_oportunidad"
+                      (keypress)="validarNumeros($event)"
+                      min="0"
+                      step="1"
+                      pattern="[0-9]"
+                      required
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="">17. Valor del Incentivo</label>
+                    <input
+                      type="number"
+                      name="valor_incentivo_psa"
+                      class="form-control"
+                      placeholder="Ej: 1234567"
+                      [(ngModel)]="datoAgregar.valor_incentivo_psa"
+                      (keypress)="validarNumeros($event)"
+                      min="0"
+                      step="1"
+                      pattern="[0-9]"
+                      required
+                    />
+                    <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary rounded-pill float-start text-uppercase addElementsTable"
+                      style="margin-top: 2rem"
+                      (click)="addMunicipio()"
+                    >
+                      Agregar Municipio
+                    </button>
+                  </div>
+                </div>
+
+                <br />
+                <br />
+
+                <table class="table my-5">
+                  <thead style="background-color: #e6effd">
+                    <tr>
+                      <th class="title-color">No</th>
+                      <th class="title-color">Departamento</th>
+                      <th class="title-color">Municipio</th>
+                      <th class="title-color">Hectáreas en Preservación PSA</th>
+                      <th class="title-color">Hectáreas en Restauración PSA</th>
+                      <th class="title-color">Hectáreas en PSA</th>
+                      <th class="title-color">Familias Beneficiadas</th>
+                      <th class="title-color">
+                        Costo de Oportunidad ($/HA/Año)
+                      </th>
+                      <th class="title-color">Valor del Incentivo Otorgado</th>
+                      <th class="title-color">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    *ngIf="municipiosAgregados.length > 0; else sinMunicipios"
+                  >
+                    <tr
+                      *ngFor="let datos of municipiosAgregados; let i = index"
+                    >
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                        {{ datos.departamento }}
+                      </td>
+                      <td>
+                        {{ datos.municipio }}
+                      </td>
+                      <td>
+                        {{ datos.area_psa_preservacion | number: ".0" }}
+                      </td>
+                      <td>
+                        {{ datos.area_psa_restauracion | number: ".0" }}
+                      </td>
+                      <td>
+                        {{
+                          datos.area_psa_preservacion +
+                            datos.area_psa_restauracion | number: ".0"
+                        }}
+                      </td>
+                      <td>
+                        {{ datos.num_familias_beneficiadas | number: ".0" }}
+                      </td>
+                      <td>
+                        {{ datos.costo_oportunidad | number: ".0" }}
+                      </td>
+                      <td>
+                        {{ datos.valor_incentivo_psa | number: ".0" }}
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn rounded-pill removeElementsTable text-uppercase"
+                          (click)="removeMunicipio(i)"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <ng-template #sinMunicipios>
+                  <tbody>
+                    <tr>
+                      <td colspan="10">
+                        <div class="sinDatos">
+                          <h4>No se han registrado Municipios</h4>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </div>
+            </form>
+          </div>
+
+          <ng-template #preinversion>
+            <div id="formPreInversion">
+              <form #formUbicacion="ngForm">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">7. Departamento *</label>
+                      <select
+                        id="selectDepartamento"
+                        name="departamento"
+                        ngModel
+                        class="form-control"
+                        (change)="changeDepto($event)"
+                        required
+                      >
+                        <option value="" selected disabled hidden>
+                          Escoger
+                        </option>
+                        <option
+                          *ngFor="let departamento of listaDepartamentos"
+                          [value]="departamento.codigo"
+                        >
+                          {{ departamento.nombre }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="">8. Municipio *</label>
+                      <select
+                        id="selectMunicipio"
+                        name="municipio"
+                        ngModel
+                        class="form-control"
+                        (change)="changeMunicipio($event)"
+                        required
+                      >
+                        <option value="" selected disabled hidden>
+                          Escoger
+                        </option>
+                        <option
+                          *ngFor="let municipio of listaMunicipios"
+                          [value]="municipio.codigo"
+                        >
+                          {{ municipio.nombre }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="w-100"></div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary rounded-pill float-left text-uppercase mt-2 addElementsTable"
+                        (click)="addMunicipio()"
+                      >
+                        Agregar Municipio
+                      </button>
+                    </div>
+                  </div>
+
+                  <table class="table my-5">
+                    <thead style="background-color: #e6effd">
+                      <tr>
+                        <th class="title-color">No</th>
+                        <th class="title-color">Departamento</th>
+                        <th class="title-color">Municipio</th>
+                        <th class="title-color">Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      *ngIf="
+                        municipiosAgregados?.length > 0;
+                        else sinMunicipios
+                      "
+                    >
+                      <tr
+                        *ngFor="let datos of municipiosAgregados; let i = index"
+                      >
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                          {{ datos.departamento }}
+                        </td>
+                        <td>
+                          {{ datos.municipio }}
+                        </td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn rounded-pill removeElementsTable text-uppercase"
+                            (click)="removeMunicipio(i)"
+                          >
+                            Eliminar
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <ng-template #sinMunicipios>
+                    <tbody>
+                      <tr>
+                        <td colspan="10">
+                          <div class="sinDatos">
+                            <h4>No se han registrado Municipios</h4>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </ng-template>
+                </div>
+              </form>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <a
+          type="button"
+          routerLink="/{{ idProyecto }}/registrar-proyecto"
+          class="btn btn-secondary rounded-pill mr-4 backEtapa px-3"
+        >
+          REGRESAR
+        </a>
+        <button
+          [disabled]="municipiosAgregados?.length <= 0"
+          (click)="guardarUbicacion()"
+          class="btn btn-primary rounded-pill nxt"
+        >
+          GUARDAR Y CONTINUAR
+        </button>
+        <div class="col-12 mt-3 ml-5">
+          <a routerLink="/proyectos" class="exitAnchor ml-4">SALIR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer app-footer></footer>

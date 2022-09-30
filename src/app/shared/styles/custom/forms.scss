@@ -1,0 +1,32 @@
+.input-sm {
+  height: 33px;
+}
+
+span.badge.error {
+  margin-top: 7px;
+}
+
+label.col-form-label {
+  & > span {
+    color: #f05050 !important;
+    margin-left: 2px;
+  }
+}
+
+timepicker {
+  input.bs-timepicker-field {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  button.btn {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+}
+
+.form-horizontal {
+  div.c-checkbox {
+    padding-top: 7px;
+  }
+}

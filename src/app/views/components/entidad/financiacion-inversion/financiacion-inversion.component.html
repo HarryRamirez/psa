@@ -1,0 +1,278 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+        <div class="col-md-8 py-3">
+          <p>
+            Este es el inicio del formulario de registro de proyectos de PSA en
+            el cual podrás diligenciar toda la información correspondiente a tu
+            proyecto.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="py-2">
+        <h3 class="title-color my-2">Financiación y Actores</h3>
+      </div>
+    </div>
+
+    <div class="row px-2">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="row d-block">
+            <h4 class="title-color mt-2 d-block">
+              Principales Fuentes Financiadoras del Proyecto
+            </h4>
+            <div class="col-md-8">
+              <p class="card-text d-block">
+                Relacione las fuentes de financiación con las que cuenta su
+                proyecto en la siguiente tabla. Al presionar el botón "Agregar
+                Fuente de Financiación" podrá agregar más de una.
+              </p>
+            </div>
+          </div>
+          <br />
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="">26. Nombre de la Fuente de Financiación</label>
+                <input
+                  type="text"
+                  class="form-control mt-4"
+                  [(ngModel)]="datosFuenteHTML.nombre"
+                  (keyup)="displaySpanErrorFuente = false"
+                  name="fuenteFinanciacion"
+                  maxlength="400"
+                  placeholder="Ej. Campo de Texto"
+                />
+                <span
+                  class="form-text text-danger"
+                  *ngIf="displaySpanErrorFuente"
+                  >Digite una opción válida</span
+                >
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="">27. Tipo de fuente de Financiación</label>
+                <select
+                  id="tipoFuenteFinanciacion"
+                  name="tipo_fuente_financiacion"
+                  class="form-control form-select mt-4"
+                  (change)="changeTipoFuente($event)"
+                  required
+                >
+                  <option value="" selected disabled hidden>Escoger</option>
+                  <option
+                    *ngFor="let tipoFuente of tiposFuenteFinanciacion"
+                    [value]="tipoFuente.item"
+                  >
+                    {{ tipoFuente.traduccion }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="">28. Valor financiado en Pesos Colombianos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="datosFuenteHTML.valor_financiado"
+                  (input)="handleInput($event, true)"
+                  name="ValorFinanciado"
+                  placeholder="Ej. Campo de Texto"
+                />
+                <span
+                  class="form-text text-danger"
+                  *ngIf="displaySpanErrorValor"
+                  >Digite una opción válida</span
+                >
+              </div>
+            </div>
+            <div class="col-md-6 mt-3">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary rounded-pill text-uppercase addElementsTable"
+                  (click)="addFuenteFinanciacion()"
+                >
+                  Agregar Fuente de Financiacion
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <table class="table my-5">
+              <thead style="background-color: #e6effd">
+                <tr>
+                  <th class="title-color">No.</th>
+                  <th class="title-color">
+                    Nombre de la Fuente de Financiación
+                  </th>
+                  <th class="title-color">Tipo de Fuente de Financiacion</th>
+                  <th class="title-color">Valor financiado $COP</th>
+                  <th class="title-color">Acción</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="fuentesAgregadas?.length > 0; else sinFuentes">
+                <tr *ngFor="let datos of fuentesAgregadas; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <p *ngFor="let info of datos.listado">
+                      {{ info.nombre }}
+                    </p>
+                  </td>
+                  <td>
+                    {{ datos.traduccion }}
+                  </td>
+                  <td>
+                    <p *ngFor="let info of datos.listado">
+                      {{ info.valor_financiado }}
+                    </p>
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn rounded-pill removeElementsTable"
+                      (click)="removeFuenteFinanciacion(i)"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <ng-template #sinFuentes>
+              <tbody>
+                <tr>
+                  <td colspan="10">
+                    <div class="sinDatos">
+                      <h4>No se han registrado Fuentes</h4>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row d-block mt-3">
+      <h4 class="title-color mt-4 mb-3 d-block">Gastos</h4>
+    </div>
+    <form (ngSubmit)="checkFormStatus()" #formFinanciacion="ngForm">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="ValorTotalIncentivos"
+              >29. Valor total de los Incentivos Otorgados en el Proyecto
+              <em
+                class="icon-info text-color-yellow-simple"
+                (click)="openAlert('1')"
+              ></em
+            ></label>
+            <input
+              type="text"
+              name="ValorTotalIncentivos"
+              id="ValorTotalIncentivos"
+              [ngModel]="datosGastosHTML.ValorTotalIncentivos"
+              (input)="handleInput($event, false)"
+              class="form-control"
+              placeholder="Ej. 123456"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="GastosAsociados"
+              >30. Gastos Asociados
+              <em
+                class="icon-info text-color-yellow-simple"
+                (click)="openAlert('2')"
+              ></em
+            ></label>
+            <input
+              type="text"
+              name="GastosAsociados"
+              id="GastosAsociados"
+              [(ngModel)]="datosGastosHTML.GastosAsociados"
+              (input)="handleInput($event, false)"
+              class="form-control mt-4"
+              placeholder="Ej. 12456"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="GastosAdministrativos"
+              >31. Gastos administrativos
+              <em
+                class="icon-info text-color-yellow-simple"
+                (click)="openAlert('3')"
+              ></em
+            ></label>
+            <input
+              type="text"
+              name="GastosAdministrativos"
+              name="GastosAdministrativos"
+              [(ngModel)]="datosGastosHTML.GastosAdministrativos"
+              (input)="handleInput($event, false)"
+              class="form-control mt-4"
+              placeholder="Ej. 122345"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-4 mt-2">
+          <div class="form-group">
+            <label for=""
+              >32. Valor total del proyecto en Pesos Colombianos</label
+            >
+            <input
+              type="text"
+              name="ValorTotalProyecto"
+              [ngModel]="datosGastosHTML.ValorTotalProyecto"
+              class="form-control"
+              readonly
+              placeholder="Ej. 12345"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="my-5">
+        <a
+          type="button"
+          routerLink="/{{ idProyecto }}/beneficiarios"
+          class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+        >
+          Regresar
+        </a>
+        <button
+          class="btn btn-primary rounded-pill text-uppercase nxt"
+          [disabled]="arrayDatosFuenteSaved?.length <= 0"
+        >
+          Guardar y Continuar
+        </button>
+        <div class="col-12 mt-3 ml-5">
+          <a routerLink="/proyectos" class="exitAnchor ml-4"> SALIR </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<footer app-footer></footer>

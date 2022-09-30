@@ -1,0 +1,356 @@
+<div style="height: 450px">
+  <button
+    type="button"
+    class="btn btn-primary btn-coment"
+    (click)="collapses()"
+    (click)="isCollapsed = !isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+    aria-controls="collapseBasic"
+  >
+    <i id="arrowCollapse" class="pi-cog"></i>
+  </button>
+  <div
+    id="collapseBasic"
+    class="box-shadow-defalut of-sy-475"
+    [collapse]="isCollapsed"
+    [isAnimated]="true"
+  >
+    <section class="contP card">
+      <div class="p-lr-15 f-w-600 p-t-10">
+        <h4 class="text-t-azul"><b>Comentarios</b></h4>
+      </div>
+      <div class="p-lr-15">
+        <p class="t-a-j text-p-azul f-s-11">
+          Encontrará un lista desplegable y un campo de texto para realizar sus
+          correcciones. Al igual, podrá visualizar los comentarios registrados y
+          filtrarlos por el estado en que se encuentren.
+        </p>
+      </div>
+      <hr />
+      <div
+        *ngIf="tipoUser == 'Autoridad' || tipoUser == 'Ministerio'"
+        class="form-group"
+        class="row"
+      >
+        <label class="col-12 p-t-8 p-l-25 p-r-35 f-s-11" for=""
+          >Campo con comentarios</label
+        >
+        <div class="col-12 p-l-25 p-r-35 f-s-11">
+          <select
+            [formControl]="campo_id"
+            name="campos"
+            ngModel
+            class="form-control f-s-11"
+            id=""
+            required
+          >
+            <option value="" selected disabled>Seleccionar campos</option>
+            <option
+              *ngFor="let campos of campos_coments"
+              [value]="campos.campo_id"
+            >
+              {{ campos.titulo }}
+            </option>
+          </select>
+        </div>
+        <label
+          class="col-12 p-l-25 p-r-35 f-s-11 m-tb-15-8"
+          for="exampleFormControlTextarea1"
+          >Observación</label
+        >
+        <div class="col-12 p-l-25 p-r-35">
+          <textarea
+            class="f-s-11 form-control textarea-h-100"
+            [formControl]="observacion"
+          ></textarea>
+        </div>
+        <div class="col-3 p-l-25 p-r-35 p-t-8">
+          <a
+            (click)="btnCancelar()"
+            type="button"
+            class="mr-4 f-s-11 btn-cancel"
+          >
+            CANCELAR
+          </a>
+        </div>
+        <div class="col-6 p-l-25 p-r-35 p-t-8">
+          <button
+            (click)="postComent()"
+            type="button"
+            class="btn btn-secondary mr-4 f-s-11 btnSend"
+          >
+            ENVIAR
+          </button>
+        </div>
+      </div>
+      <hr
+        class="m-t-35 m-b-25"
+        *ngIf="tipoUser == 'Autoridad' || tipoUser == 'Ministerio'"
+      />
+      <div class="background-color-white">
+        <div class="form-group" class="row">
+          <label class="col p-t-8 p-l-25 p-r-0" for=""
+            >Filtrar por estado:</label
+          >
+          <div class="col p-l-0 p-r-35">
+            <select
+              name="etapa"
+              ngModel
+              class="form-control"
+              id=""
+              (change)="changeForm($event)"
+              required
+            >
+              <option value="" selected disabled>Escoger</option>
+              <option value="all">Todos</option>
+              <option
+                *ngFor="let estados of estados_proyecto"
+                [value]="estados.item"
+              >
+                {{ estados.traduccion }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <hr class="m-b-25" />
+        <div>
+          <div *ngFor="let comentario of arrComment; index as i">
+            <div
+              class="comentario"
+              *ngIf="
+                (open && comentario.comentario.estado === 'abierto') ||
+                (close && comentario.comentario.estado === 'cerrado') ||
+                (delete && comentario.comentario.estado === 'eliminado') ||
+                (resolved && comentario.comentario.estado === 'corregido')
+              "
+            >
+              <div
+                *ngIf="this.arrCollapseId[i][2].divEdit == false"
+                class="container"
+              >
+                <div class="row">
+                  <div class="p-l-15 col-10">
+                    <p>
+                      <b>{{ comentario.comentario.campo }}</b>
+                    </p>
+                  </div>
+                  <div
+                    class="p-l-15 col-2"
+                    *ngIf="
+                      comentario.comentario.estado != 'eliminado' &&
+                      comentario.comentario.estado != 'cerrado'
+                    "
+                  >
+                    <div class="btn-group" dropdown [isDisabled]="disabled">
+                      <button
+                        id="button-disabled-menu"
+                        dropdownToggle
+                        type="button"
+                        class="dropdown-toggle btn-3-dot"
+                        aria-controls="dropdown-disabled-menu"
+                      ></button>
+                      <ul
+                        id="dropdown-disabled-menu"
+                        *dropdownMenu
+                        class="dropdown-menu dropdown-menu-right"
+                        role="menu"
+                        aria-labelledby="button-disabled-menu"
+                      >
+                        <li role="menuitem">
+                          <a
+                            (click)="clickResponder(comentario, i)"
+                            class="dropdown-item"
+                            href="#"
+                            >Responder</a
+                          >
+                        </li>
+                        <li
+                          *ngIf="
+                            comentario.comentario.respuestas <= 0 &&
+                            idUsuario == comentario.comentario.autor_id &&
+                            comentario.comentario.estado == 'abierto'
+                          "
+                          role="menuitem"
+                        >
+                          <a
+                            (click)="clickEditar(i)"
+                            class="dropdown-item"
+                            href="#"
+                            >Editar</a
+                          >
+                        </li>
+                        <li
+                          *ngIf="
+                            comentario.comentario.respuestas > 0 &&
+                            comentario.comentario.estado == 'abierto' &&
+                            idUsuario == idAutorP
+                          "
+                          role="menuitem"
+                        >
+                          <a
+                            (click)="sweetalertResolver(i)"
+                            class="dropdown-item"
+                            href="#"
+                            >Resolver</a
+                          >
+                        </li>
+                        <li
+                          *ngIf="
+                            comentario.comentario.respuestas <= 0 &&
+                            idUsuario == comentario.comentario.autor_id
+                          "
+                          role="menuitem"
+                        >
+                          <a
+                            (click)="opensweetalert(i)"
+                            class="dropdown-item"
+                            href="#"
+                            >Eliminar</a
+                          >
+                        </li>
+                        <li
+                          *ngIf="
+                            comentario.comentario.estado == 'corregido' &&
+                            idUsuario == comentario.comentario.autor_id
+                          "
+                          role="menuitem"
+                        >
+                          <a
+                            (click)="clickCerrar(i)"
+                            class="dropdown-item"
+                            href="#"
+                            >Cerrar</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-l-15">
+                  <p class="f-s-s">{{ comentario.comentario.comentario }}</p>
+                </div>
+              </div>
+              <div
+                *ngIf="this.arrCollapseId[i][2].divEdit"
+                class="form-group"
+                class="row m-b-15"
+              >
+                <label class="col-12 p-t-8 p-l-25 p-r-35 f-s-11" for=""
+                  >Número del campo a ajustar</label
+                >
+                <div class="col-12 p-l-25 p-r-35 f-s-11">
+                  <select
+                    [formControl]="editCampo"
+                    name="campos"
+                    ngModel
+                    class="form-control f-s-11"
+                    id=""
+                    required
+                  >
+                    <option value="">{{ selectPre }}</option>
+                    <option
+                      *ngFor="let campos of campos_coments"
+                      [value]="campos.campo_id"
+                    >
+                      {{ campos.titulo }}
+                    </option>
+                  </select>
+                </div>
+                <label
+                  class="col-12 p-l-25 p-r-35 f-s-11 m-tb-15-8"
+                  for="exampleFormControlTextarea1"
+                  >Observación</label
+                >
+                <div class="col-12 p-l-25 p-r-35">
+                  <textarea
+                    class="f-s-11 form-control textarea-h-100"
+                    [formControl]="editComent"
+                  ></textarea>
+                </div>
+                <div class="col-3 p-l-25 p-r-35 p-t-8">
+                  <a
+                    (click)="btnCancelEdit(i)"
+                    type="button"
+                    class="mr-4 f-s-11 btn-cancel"
+                  >
+                    CANCELAR
+                  </a>
+                </div>
+                <div class="col-6 p-l-25 p-r-35 p-t-8">
+                  <button
+                    (click)="putEditComent(i)"
+                    type="button"
+                    class="btn btn-secondary mr-4 f-s-11 btnSend"
+                  >
+                    GUARDAR
+                  </button>
+                </div>
+              </div>
+              <div
+                class="container p-l-15"
+                *ngIf="comentario.comentario.respuestas > 0"
+              >
+                <span
+                  class="m-tr-5 pi-down cursor-pointer"
+                  (click)="arrCollapse[i].Flat = !arrCollapse[i].Flat"
+                ></span>
+                <p
+                  class="b-c-azul f-w-600 cursor-pointer wpc-120"
+                  (click)="arrCollapse[i].Flat = !arrCollapse[i].Flat"
+                  [attr.aria-expanded]="!arrCollapse[i].Flat"
+                  aria-controls="arrCollapseId[i].Id"
+                >
+                  <a class="btn btn-primary btBR-50 p-lr-6">{{
+                    comentario.comentario.respuestas
+                  }}</a>
+                  Respuesta
+                </p>
+                <div
+                  class="respuestas p-lr-25"
+                  id="'{{ arrCollapseId[i].Id }}'"
+                  [collapse]="arrCollapse[i].Flat"
+                  [isAnimated]="true"
+                >
+                  <div *ngFor="let resp of comentario.respuestas; index as j">
+                    <p>
+                      <b style="margin-right: 15px">{{
+                        resp.fecha_creacion | date: "MMM-dd"
+                      }}</b
+                      >{{ resp.texto }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row m-b-15" *ngIf="arrCollapseId[i][1].divResp">
+                <div class="col-12 p-l-25 p-r-35">
+                  <textarea
+                    class="f-s-11 form-control textarea-h-100"
+                    [formControl]="respuestaFC"
+                  ></textarea>
+                </div>
+                <div class="col-3 p-l-25 p-r-35 p-t-8">
+                  <a
+                    (click)="btnCancelResponse(i)"
+                    type="button"
+                    class="mr-4 f-s-11 btn-cancel"
+                  >
+                    CANCELAR
+                  </a>
+                </div>
+                <div class="col-6 p-l-25 p-r-35 p-t-8">
+                  <button
+                    (click)="postResponse(comentario, i)"
+                    type="button"
+                    class="btn btn-secondary mr-4 f-s-11 btnSend"
+                  >
+                    ENVIAR
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

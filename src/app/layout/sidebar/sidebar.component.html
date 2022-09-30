@@ -1,0 +1,72 @@
+<!-- Sidebar (left) -->
+<div class="aside-inner">
+  <nav
+    class="sidebar"
+    sidebar-anyclick-close=""
+    [class.show-scrollbar]="settings.getLayoutSetting('asideScrollbar')"
+  >
+    <ul class="sidebar-nav">
+      <img class="img-fluid m-5" src="assets/img/logo-psa.png" alt="" />
+
+      <span class="text-center text-color-blue">
+        <h4>Menú de opciones</h4>
+      </span>
+
+      <li
+        id="itemC1"
+        *ngIf="rol && (rol === 'Autoridad' || rol === 'Ministerio')"
+        class="mt-5 icon-validate-projects text-center t-c-b"
+        (click)="itemClick()"
+        routerLink="/autoridad"
+      >
+        <span class="ml-3">
+          <h6><a>Validar Proyectos</a></h6>
+        </span>
+      </li>
+      <li
+        id="itemC2"
+        class="mt-2 icon-my-projects text-center t-c-b"
+        (click)="item2Click()"
+        routerLink="/proyectos"
+        routerLinkActive="activeP"
+      >
+        <span class="ml-3">
+          <h6><a>Mis Proyectos</a></h6>
+        </span>
+      </li>
+      <li
+        id="itemC3"
+        *ngIf="rol && rol === 'Ministerio'"
+        class="mt-2 icon-geographic-viewer text-center t-c-b"
+        (click)="item3Click()"
+        routerLink="/proyectos/buscar"
+      >
+        <span class="ml-3">
+          <h6><a>Visor Geográfico</a></h6>
+        </span>
+      </li>
+      <br />
+      <hr />
+
+      <li [routerLinkActive]="['active']" class="mt-5 text-center">
+        <em class="icon-logout text-color-blue-simple"></em>
+        <span class="ml-3 text-color-blue-simple"
+          ><a (click)="logout()">Cerrar sesión</a></span
+        >
+      </li>
+
+      <div class="container px-4">
+        <img
+          class="img-fluid mt-5"
+          src="assets/img/logo-cuidadores.png"
+          alt=""
+        />
+        <img
+          class="img-fluid mt-5"
+          src="assets/img/logo-minambiente.png"
+          alt=""
+        />
+      </div>
+    </ul>
+  </nav>
+</div>

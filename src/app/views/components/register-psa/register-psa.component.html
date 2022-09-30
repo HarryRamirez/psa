@@ -1,0 +1,149 @@
+<div class="wrapper background-color-white">
+    <app-header></app-header>
+    <section class="">
+        <div class="background-color-white p-t-25">
+          <div class="p-l-75">
+            <div class="col-12">
+              <h1 class="title-color">Registro PSA</h1>
+              <p>
+                Conozca aquí el historial de su proyecto desde su envío y revsión.
+                Podrá consultar los cambios realizados y la fecha en la que fueron
+                solicitados.
+              </p>
+              <br/>
+              <div class="col-1"></div>
+              <div class="col-10">
+                <form [formGroup]="dataBasicaForm">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="py-2">
+                          <h3 class="title-color my-2">Datos básicos</h3>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="">Nombres</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="nombres"
+                                id=""
+                                placeholder="Ej. Juan Ernesto"
+                                required
+                                [formControl]="nombres"
+                                readonly
+                              />
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label for="">Apellidos</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="apellidos"
+                                id=""
+                                placeholder="Ej. Pérez Pinto"
+                                required
+                                [formControl]="apellidos"
+                                [attr.disabled]="true"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-md-1">
+                            <div class="form-group">
+                              <label for="">Prefijo</label>
+                              <input class="form-control"
+                                type="text"
+                                readonly
+                                [formControl]='prefijo'
+                              />
+                            </div>
+                          </div>
+                          <div class="col-md-3">
+                            <div class="form-group">
+                              <label for="">Teléfono móvil</label>
+                              <input class="form-control"
+                                pattern="^[3]{1}[0-9]{9}$"
+                                maxlength="10"
+                                onkeypress="return event.charCode >= 48 &&  event.charCode <= 57"
+                                oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                [formControl]='telefono'
+                              />
+                              <div >
+                                <!-- <span *ngIf="dataBasicaForm.get('telefono').hasError('required')" class="form-text text-danger">El teléfono celular es requerido.</span>
+                                <span *ngIf="dataBasicaForm.get('telefono').hasError('maxLength')" class="form-text text-danger">Máximo 10 dígitos.</span> -->
+                                <span *ngIf="telefono.value.length < 10" class="form-text text-danger">Mínimo 10 dígitos.</span>
+                                <span *ngIf="telefono.errors?.pattern" class="form-text text-danger">debe iniciar con el número 3</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label for="">Correo Electrónico</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="nombre_proyecto"
+                                    id=""
+                                    placeholder="Ej. juan@gmail.com"
+                                    required
+                                    maxlength="128"
+                                    [formControl]="correo"
+                                    [attr.disabled]="true"
+                                />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                  <label for="">Tipo de Persona*</label>
+                                  <select class="form-control" [formControl]="tipoPersona" name="campos" required>
+                                    <option value="" selected disabled>Seleccionar campos</option>
+                                    <option *ngFor="let listaTipPer of listaTipPer" [value]="listaTipPer.abbreviation">
+                                      {{ listaTipPer.name }}
+                                    </option>
+                                  </select>
+                                  <span *ngIf="tipoPersona.invalid" class="form-text text-danger">Seleccione una opción.</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div *ngIf="tipoPersona.value == 'Representante Autoridad Ambiental'" class="form-group">
+                                    <label for="">Nombre Entidad*</label>
+                                    <select class="form-control" [formControl]="nombreEntidad" name="campos" required>
+                                      <option value="" selected disabled>Seleccionar campos</option>
+                                      <option *ngFor="let autoridades of listAutoridadesEnum" [value]="autoridades.codigo">
+                                        {{ autoridades.nombre }}
+                                      </option>
+                                    </select>
+                                    <span *ngIf="nombreEntidad.invalid" class="form-text text-danger">Seleccione una opción.</span>
+                                </div>
+                                <p>nombreEntidad: {{nombreEntidad.value}}</p>
+                            </div>
+                        </div>
+                        <br/>
+                      </div>
+                    </div>
+                </form>
+              </div>
+              <div class="col-1"></div>
+              <br/>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <button type="button" class="btn btn-secondary mr-4 f-s-16 btnCancel" (click)="cancelar()">
+                    Cancelar
+                  </button>
+                  <button (click)="sendData()" type="button" class="btn btn-secondary mr-4 f-s-16 btnSend">
+                    Registrar
+                  </button>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <footer class="margin-top-no-info" app-footer></footer>
+</div>

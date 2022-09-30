@@ -1,0 +1,252 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Work+Sans&display=swap");
+
+//== Vendor
+@import "~@fortawesome/fontawesome-free/css/brands.css";
+@import "~@fortawesome/fontawesome-free/css/regular.css";
+@import "~@fortawesome/fontawesome-free/css/solid.css";
+@import "~@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "~simple-line-icons/css/simple-line-icons.css";
+
+@import "~loaders.css/loaders.css";
+
+//== Bootstrap
+@import "./app/shared/styles/bootstrap.scss";
+//== Application
+@import "./app/shared/styles/app.scss";
+
+//== Top navbar
+@import "./app/shared/styles/custom/top-navbar.scss";
+
+//== Sidebar
+@import "./app/shared/styles/custom/sidebar.scss";
+
+//== Filters
+@import "./app/shared/styles/custom/filters.scss";
+
+//== Table
+@import "./app/shared/styles/custom/tables.scss";
+
+//== Forms
+@import "./app/shared/styles/custom/forms.scss";
+
+//== Modal
+@import "./app/shared/styles/custom/modal.scss";
+
+//== Buttons
+@import "./app/shared/styles/custom/buttons.scss";
+
+//== Pagination
+@import "./app/shared/styles/custom/pagination.scss";
+
+//== Alerts
+@import "./app/shared/styles/custom/alerts.scss";
+
+//== ng-select
+@import "./app/shared/styles/custom/ng-select.scss";
+
+//== Switch
+@import "./app/shared/styles/custom/switch.scss";
+
+//== Tree
+@import "./app/shared/styles/custom/tree.scss";
+
+//== Toast
+@import "./app/shared/styles/custom/toastr.scss";
+
+@import "./app/shared/styles/custom/auth-layout/forms.scss";
+
+p,
+td {
+  color: #4b4b4b;
+}
+
+a {
+  cursor: pointer;
+
+  &.help {
+    color: #656565;
+    margin-left: 0.25rem;
+  }
+}
+
+.aside-container {
+  background-color: #f6f8f9;
+}
+
+.title-color {
+  color: #004884;
+}
+
+h2.title-color,
+h3.title-color,
+h4.title-color,
+h5.title-color,
+h6.title-color {
+  font-family: "Montserrat", sans-serif;
+  color: #004884;
+}
+
+h2.title-color {
+  font-size: 2rem;
+}
+
+h3.title-color {
+  font-size: 1.5rem;
+}
+
+h4.title-color,
+h5.title-color,
+h6.title-color {
+  font-size: 1.125rem;
+}
+
+div.sinDatos {
+  color: #004884;
+  text-align: center;
+  margin: 20px;
+}
+
+div.card {
+  border: 1px solid #e6effd;
+  border-radius: 5px;
+}
+
+div.card-body {
+  margin: 1rem 1.2rem;
+}
+
+.descEtapa {
+  font-size: 0.875rem;
+}
+
+.descEtapaAlternative {
+  font-size: 14px;
+}
+
+label.readOnlyField {
+  color: #bababa;
+}
+
+.badge {
+  font-weight: normal !important;
+}
+
+.btnPrimary {
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.addElementsTable {
+  color: #3366cc;
+}
+
+.addElementsTable:hover {
+  color: #fff;
+  background-color: #3366cc;
+}
+
+.removeElementsTable {
+  border-color: #a80521;
+  color: #a80521;
+  padding: 0.2rem 1.5rem 0.2rem 1.5rem;
+}
+
+.removeElementsTable:hover {
+  color: #fff;
+  background-color: #a80521;
+}
+
+.backEtapa {
+  border-radius: 5px;
+  border: 2px solid #3366cc;
+  color: #3366cc;
+  padding-right: 2rem !important;
+  padding-left: 2rem !important;
+}
+
+.backEtapa:hover {
+  background-color: #004884;
+  border: 2px solid #004884;
+  color: #ffffff;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+.exitAnchor.disabled {
+  color: gray;
+  cursor: not-allowed;
+}
+
+.nxt {
+  border-radius: 5px;
+  background-color: #3366cc;
+}
+
+.nxt:hover {
+  background-color: #004884;
+}
+
+.btnUpdateProyecto {
+  background-color: #3366cc;
+  color: #ffffff;
+}
+
+.text-color-yellow-simple {
+  background-color: #ffab00;
+  color: #ffffff;
+  border-radius: 100%;
+  font-size: initial;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.wrn-text {
+  color: #ffab00;
+}
+
+.listBubble {
+  margin-bottom: 0 !important;
+  background-color: #e6effd;
+  border-radius: 17px;
+  padding: 3px 13px;
+  margin-top: 0.4em;
+  color: #004884;
+  font-size: 12px;
+  border-color: transparent;
+
+  a:not([type="button"]) {
+    color: #004884;
+    text-decoration: underline;
+  }
+
+  a[type="button"] {
+    float: right;
+    border-radius: inherit;
+    font-weight: bold;
+  }
+}
+
+.frmBl {
+  strong,
+  label {
+    color: #4b4b4b;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 1rem 0 0 1rem;
+
+    li::before {
+      content: "-";
+      margin-right: 0.5em;
+      margin-left: -1em;
+    }
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+// @import "~bootstrap/scss/bootstrap";

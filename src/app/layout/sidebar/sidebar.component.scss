@@ -1,0 +1,83 @@
+.aside-container {
+  background-color: #f6f8f9;
+}
+
+.sidebar {
+  background-color: #f6f8f9;
+}
+
+.text-color-blue {
+  color: #0b457f;
+}
+
+.text-color-blue-simple {
+  color: #3366cc;
+}
+
+.t-c-b {
+  color: #3366cc;
+  height: 54px;
+}
+
+.back-sidebar {
+  background-color: #3366cc;
+  color: #fff;
+  height: 54px;
+  a {
+    color: #fff;
+  }
+}
+li:focus,
+li:hover,
+li.activeP {
+  background-color: #3366cc;
+  text-decoration: none;
+  a {
+    color: #fff;
+  }
+  span::before {
+    filter: none !important;
+    display: list-item;
+    position: absolute;
+    margin: 15px 0 0 32px;
+  }
+}
+
+.icon-validate-projects span::before {
+  content: url("../../../assets/img/datos-basicos.svg");
+  filter: invert(50%) sepia(47%) saturate(2092%) hue-rotate(201deg)
+    brightness(100%) contrast(87%);
+  display: list-item;
+  position: absolute;
+  margin: 15px 0 0 32px;
+}
+
+.icon-my-projects span::before {
+  content: url("../../../assets/img/msproyectos.svg");
+  filter: invert(50%) sepia(47%) saturate(2092%) hue-rotate(201deg)
+    brightness(100%) contrast(87%);
+  display: list-item;
+  position: absolute;
+  margin: 15px 0 0 32px;
+}
+
+.icon-geographic-viewer span::before {
+  content: url("../../../assets/img/Beneficiarios.svg");
+  filter: invert(50%) sepia(47%) saturate(2092%) hue-rotate(201deg)
+    brightness(100%) contrast(87%);
+  display: list-item;
+  position: absolute;
+  margin: 15px 0 0 32px;
+}
+/*
+a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+*/

@@ -1,0 +1,231 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="col-md-8 py-3">
+        <p>
+          Este es el inicio del formulario de registro de proyectos de PSA en el
+          cual podrás diligenciar toda la información correspondiente a tu
+          proyecto.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="py-2">
+        <h3 class="title-color my-3">Incentivo y Acuerdos</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mt-2">
+        <div class="row mb-1">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for=""
+                >33. ¿Quiénes se benefician directamente de los servicios
+                ambientales?</label
+              >
+              <textarea
+                name="beneficiarios"
+                [(ngModel)]="datosFuenteHTML.beneficiado_directo_psa"
+                id=""
+                class="form-control"
+                rows="4"
+                placeholder="Texto de Ejemplo: Empresas de Servicios Públicos, hidroeléctricas, empresas que hacen uso de los Servicios Ambientales"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for=""
+                >34. Área de los Predios que Hacen Parte del Área y Ecosistema
+                Estratégico y que son Objeto del Incentivo</label
+              >
+              <input
+                type="text"
+                [(ngModel)]="datosFuenteHTML.area_predio_ecosistema_psa"
+                class="form-control"
+                name="area_predio"
+                maxlength="400"
+                placeholder="####"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for=""
+                >35. Método de Estimación del Valor del Incentivo</label
+              >
+              <select
+                id="metodo_estimacion"
+                name="metodo_estimacion"
+                [(ngModel)]="datosFuenteHTML.metodo_estimacion_valor_incentivo"
+                class="form-control form-select mt-4"
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let metodo of listMetodosEstimacion"
+                  [value]="metodo.item"
+                >
+                  {{ metodo.traduccion }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for=""
+                >36. Especifique cual otro Método de Estimación del Incentivo
+                Utilizó</label
+              >
+              <input
+                type="text"
+                class="form-control mt-4"
+                [(ngModel)]="datosFuenteHTML.otro_metodo_estimacion"
+                name="otro_metodo_estimacion"
+                maxlength="400"
+                placeholder="Ej. Campo de Texto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">37. ¿Cuál es el Método de Pago?</label>
+              <select
+                id="metodo_pago"
+                name="tipo_fuente_financiacion"
+                [(ngModel)]="datosFuenteHTML.metodo_pago_psa"
+                class="form-control form-select"
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let metodo of listMetodosPago"
+                  [value]="metodo.item"
+                >
+                  {{ metodo.traduccion }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">38. ¿Cuál es la periodicidad de pago?</label>
+              <select
+                id="periodicidad_pago"
+                name="periodicidad_pago"
+                [(ngModel)]="datosFuenteHTML.periodicidad_pago_psa"
+                class="form-control form-select"
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let periodicidad of listPeriodicidadesPago"
+                  [value]="periodicidad.item"
+                >
+                  {{ periodicidad.traduccion }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">39. Especifique la Periodicidad del Pago</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="datosFuenteHTML.otra_periodicidad_psa"
+                name="otra_periodicidad"
+                maxlength="400"
+                placeholder="Ej. Campo de Texto"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">40. Término de Duración del Acuerdo (años)</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="datosFuenteHTML.termino_duracion_acuerdo"
+                name="termino_duracion_acuerdo"
+                maxlength="400"
+                step="0.01"
+                min="0"
+                max="10"
+                pattern="^\d*(\.\d{0,2})?$"
+                placeholder="1,5"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">41. Tipo de acuerdo</label>
+              <select
+                id="tipo_acuerdo"
+                name="tipo_acuerdo"
+                [(ngModel)]="datosFuenteHTML.tipos_acuerdo_psa"
+                class="form-control form-select"
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let tipo of listTiposAcuerdos"
+                  [value]="tipo.item"
+                >
+                  {{ tipo.traduccion }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="">42. Número de Acuerdos Celebrados</label>
+              <input
+                type="text"
+                class="form-control"
+                name="acuerdos_celebrados"
+                [(ngModel)]="datosFuenteHTML.num_acuerdo_celebrado"
+                maxlength="400"
+                placeholder="####"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-5">
+      <a
+        type="button"
+        routerLink="/{{ idProyecto }}/financiacion-inversion"
+        class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+      >
+        Regresar
+      </a>
+      <button
+        type="button"
+        class="btn btn-primary rounded-pill text-uppercase nxt"
+        (click)="saveIncentivosAcuerdos()"
+      >
+        Guardar y Continuar
+      </button>
+      <div class="col-12 mt-3 ml-5">
+        <a routerLink="/proyectos" class="exitAnchor ml-4"> SALIR </a>
+      </div>
+    </div>
+  </div>
+</div>
+<footer app-footer></footer>

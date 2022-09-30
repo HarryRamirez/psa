@@ -1,0 +1,237 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-sidebar class="aside-container"></app-sidebar>
+  <section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper background-color-white">
+      <div class="headerContent row">
+        <div class="col-7">
+          <h2 class="title-color mt-2">Proyectos Creados</h2>
+        </div>
+        <div class="col-5">
+          <button
+            type="button"
+            class="btn btn-primary rounded-pill btnAdd btnPrimary p-2 px-3 mt-2 mr-5 float-right"
+            [routerLink]="['/registrar-proyecto']"
+          >
+            Registrar Proyecto
+          </button>
+        </div>
+      </div>
+      <!-- <table class="table mt-5 misProyectosTable">
+        <thead>
+          <tr
+            class="text-center background-color-blue title-color"
+            style="margin-top: 5px; padding-top: 5px"
+          >
+            <th scope="col" style="width: 150px" sortable="estado" (sort)="onSort($event)">
+              Estado
+            </th>
+            <th scope="col" style="width: 250px" sortable="nombre" (sort)="onSort($event)">
+              Nombre proyecto
+            </th>
+            <th scope="col" sortable="id" (sort)="onSort($event)">
+              ID de Proyecto
+            </th>
+            <th scope="col" sortable="fecha_registro" (sort)="onSort($event)">
+              Fecha de Registro
+            </th>
+            <th scope="col" style="width: 150px" sortable="fecha_registro" (sort)="onSort($event)">
+              Correcciones / Observaciones
+            </th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="mostrarTabla">
+          <tr class="text-center" *ngFor="let proyecto of dataTable">
+            <td class="b-l-1 l-h-75">
+              <span
+                [attr.class]="
+                  proyecto['estado'] == 'registrado'
+                    ? 'badge badge-success'
+                    : proyecto['estado'] == 'en construcción'
+                    ? 'badge badge-warning'
+                    : proyecto['estado'] == 'rechazado'
+                    ? 'badge badge-danger'
+                    : proyecto['estado'] == 'borrador'
+                    ? 'badge badge-info'
+                    : 'badge badge-secondary'">
+                    {{ proyecto["traduccion"] }}
+              </span>
+            </td>
+            <td class="b-rl-0 l-h-75 t-a-l">
+              {{ proyecto["nombre"] }}
+            </td>
+            <td class="b-rl-0 l-h-75">
+              {{ proyecto["idFill"] }}
+            </td>
+            <td class="b-rl-0 l-h-75">
+              {{ proyecto["fecha_registro"] | date: "yyyy/MM/dd" }}
+            </td>
+            <td class="b-rl-0 l-h-75">
+              <div *ngIf="proyecto['observaciones'] > 0">
+                <strong>{{ proyecto["correcciones"] }}</strong> /
+                {{ proyecto["observaciones"] }}
+              </div>
+            </td>
+            <td class="b-r-1 l-h-45 t-a-l" style="padding: 3px">
+              <a
+                class="btn btn-outline-primary rounded-pill text-uppercase"
+                [routerLink]="['/proyectos', proyecto['id']]"
+                style="margin-right: 10px"
+              >
+                <strong class="f-s-12">Ver Detalle</strong>
+              </a>
+              <button
+                *ngIf="
+                  proyecto['estado'] === 'registrado' ||
+                  proyecto['estado'] === 'revisado' ||
+                  proyecto['estado'] === 'aprobado'
+                "
+                type="button"
+                class="btn btn-outline-success rounded-pill text-uppercase"
+              >
+                <strong class="f-s-12">Descargar Certificado</strong>
+              </button>
+              <a
+                routerLink="/proyectos/{{ proyecto.id }}/editar"
+                class="btn btn-outline-primary rounded-pill text-uppercase btnUpdateProyecto"
+              >
+                <strong class="f-s-12">Actualizar</strong>
+              </a>
+              <button
+                *ngIf="proyecto['estado'] === 'rechazado'"
+                type="button"
+                class="btn btn-outline-danger rounded-pill text-uppercase"
+                (click)="opensweetalert()"
+              >
+                <strong class="f-s-12">Eliminar</strong>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+      <table class="spacing-table">
+        <thead>
+          <tr>
+            <th
+              scope="col"
+              style="width: 150px"
+              sortable="estado"
+              (sort)="onSort($event)"
+            >
+              Estado
+            </th>
+            <th
+              scope="col"
+              style="width: 250px"
+              sortable="nombre"
+              (sort)="onSort($event)"
+            >
+              Nombre proyecto
+            </th>
+            <th scope="col" sortable="id" (sort)="onSort($event)">
+              ID de Proyecto
+            </th>
+            <th scope="col" sortable="fecha_registro" (sort)="onSort($event)">
+              Fecha de Registro
+            </th>
+            <th
+              scope="col"
+              style="width: 150px"
+              sortable="fecha_registro"
+              (sort)="onSort($event)"
+            >
+              Correcciones / <br />Observaciones
+            </th>
+            <th scope="col" style="width: 270px">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proyecto of dataTable">
+            <td style="text-align: left; width: 150px">
+              <span
+                [attr.class]="
+                  proyecto['estado'] == 'registrado'
+                    ? 'badge badge-success'
+                    : proyecto['estado'] == 'en construcción'
+                    ? 'badge badge-warning'
+                    : proyecto['estado'] == 'rechazado'
+                    ? 'badge badge-danger'
+                    : proyecto['estado'] == 'borrador'
+                    ? 'badge badge-info'
+                    : 'badge badge-secondary'
+                "
+              >
+                {{ proyecto["traduccion"] }}
+              </span>
+            </td>
+            <td style="text-align: left; width: 250px">
+              {{ proyecto["nombre"] }}
+            </td>
+            <td style="text-align: left">{{ proyecto["idFill"] }}</td>
+            <td style="text-align: left">
+              {{ proyecto["fecha_registro"] | date: "yyyy/MM/dd" }}
+            </td>
+            <td style="text-align: right; width: 150px">
+              <div *ngIf="proyecto['observaciones'] > 0">
+                <strong>{{ proyecto["correcciones"] }}</strong> /
+                {{ proyecto["observaciones"] }}
+              </div>
+            </td>
+            <td style="text-align: left; width: 270px">
+              <a
+                class="btn btn-outline-primary rounded-pill text-uppercase mar-tab-5"
+                [routerLink]="['/proyectos', proyecto['id']]"
+                style="margin-right: 10px"
+              >
+                <strong class="f-s-12">Ver Detalle</strong>
+              </a>
+              <button
+                *ngIf="
+                  proyecto['estado'] === 'registrado' ||
+                  proyecto['estado'] === 'revisado' ||
+                  proyecto['estado'] === 'aprobado'
+                "
+                type="button"
+                class="btn btn-outline-success rounded-pill text-uppercase mar-tab-5"
+              >
+                <strong class="f-s-12">Descargar Certificado</strong>
+              </button>
+              <a
+                style="margin-left: 5px"
+                routerLink="/{{ proyecto.id }}/registrar-proyecto"
+                class="btn btn-outline-primary rounded-pill text-uppercase btnUpdateProyecto"
+              >
+                <strong class="f-s-12">Actualizar</strong>
+              </a>
+              <button
+                *ngIf="proyecto['estado'] === 'rechazado'"
+                type="button"
+                class="btn btn-outline-danger rounded-pill text-uppercase mar-tab-5"
+                (click)="opensweetalert()"
+              >
+                <strong class="f-s-12">Eliminar</strong>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center p-2" *ngIf="mostrarTabla"></div>
+      <span *ngIf="!mostrarTabla || dataTable.length <= 0">
+        <h3 class="text-center title-color mt-5">
+          Actualmente usted no cuenta con proyectos registrados en el sistema
+        </h3>
+        <h4 class="text-center description-color mt-3">
+          Si desea registrar su proyecto presione el botón "Registrar Proyecto"
+        </h4>
+      </span>
+    </div>
+  </section>
+  <footer
+    class="margin-top-no-info"
+    app-footer
+    *ngIf="!mostrarTabla || proyectoData.length < 10"
+  ></footer>
+  <footer app-footer *ngIf="mostrarTabla && proyectoData.length >= 10"></footer>
+</div>

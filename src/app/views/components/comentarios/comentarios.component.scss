@@ -1,0 +1,203 @@
+.b-c-azul {
+  color: #5d9cec;
+}
+
+.contP {
+  width: 300px;
+  border: 1px solid #f6f8f9;
+}
+
+.of-sy-475 {
+  height: 475px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.comentario {
+  padding-top: 10px;
+  border-bottom: 1px solid #e4eaec;
+  cursor: pointer;
+}
+.comentario:hover {
+  border-left: 5px solid #5d9cec;
+}
+
+.box-shadow-defalut {
+  box-shadow: -0.25rem 0 1rem rgb(0 0 0 / 15%);
+}
+
+.p-t-8 {
+  padding-top: 8px;
+}
+
+.p-l-0 {
+  padding-left: 0px;
+}
+
+.p-r-0 {
+  padding-right: 0px;
+}
+
+.p-lr-15 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.text-t-azul {
+  color: #004884;
+}
+
+.text-p-azul {
+  color: #3366cc;
+}
+
+.p-t-10 {
+  padding-top: 10px;
+}
+
+hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.t-a-j {
+  text-align: justify;
+}
+
+.p-l-25 {
+  padding-left: 25px;
+}
+
+.p-r-35 {
+  padding-right: 35px;
+}
+
+.p-lr-25 {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+.btBR-50 {
+  border-radius: 50%;
+}
+
+.p-lr-6 {
+  padding: 0px 6px;
+}
+
+.btn-coment {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1rem;
+  background: #3366cc;
+  color: #ffffff;
+  text-align: center;
+  top: 50%;
+  right: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  transition: background-color 0.2s;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: -0.25rem 0 1rem rgb(0 0 0 / 15%);
+}
+
+.pi-cog:before {
+  content: url("../../../../assets/img/chevron-left.svg");
+  margin-left: -8px;
+}
+
+.pi-cog2::before {
+  content: url("../../../../assets/img/chevron-right.svg");
+  margin-left: -8px;
+}
+
+.m-tr-5 {
+  float: left;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.pi-down::after {
+  content: url("../../../../assets/img/chevron-down.svg");
+}
+
+.wpc-120 {
+  width: 120px;
+}
+
+b {
+  font-weight: 600;
+}
+
+.f-w-600 {
+  font-weight: 600;
+}
+
+.card {
+  background-color: #f6f8f9;
+}
+
+.f-s-s {
+  font-size: small;
+}
+
+.f-s-11 {
+  font-size: 11px;
+}
+
+.m-b-15 {
+  margin-bottom: 15px;
+}
+
+.m-tb-15-8 {
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.m-b-25 {
+  margin: 25px 0px;
+}
+
+.m-t-35 {
+  margin-top: 35px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.textarea-h-100 {
+  height: 116px;
+  margin-bottom: 10px;
+}
+.d-down::after {
+  content: url("../../../../assets/img/three-dots-vertical.svg");
+}
+.dropdown-toggle::after {
+  right: 0px;
+  display: inline-block;
+  margin-left: 0px;
+  vertical-align: 0px;
+  content: url("../../../../assets/img/three-dots-vertical.svg");
+  border-top: 0px;
+  border-right: 0px;
+  border-bottom: 0px;
+  border-left: 0.3em solid transparent;
+}
+
+.btn-3-dot {
+  border-color: #f6f8f9;
+  border: #f6f8f9;
+  background-color: #f6f8f9;
+}
+
+.btn-cancel {
+  color: #3366cc;
+  text-decoration: underline;
+}
+
+.btnSend {
+  border-radius: 25px;
+  background-color: #3366cc;
+  color: #fff;
+}

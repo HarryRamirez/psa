@@ -1,0 +1,91 @@
+.p-t-25 {
+  padding-top: 25px;
+}
+
+.p-l-75 {
+  margin-left: 75px;
+}
+
+.contenido {
+  padding-left: 15px;
+  padding-top: 25px;
+}
+
+.hEstados {
+  display: flex;
+  overflow-x: auto;
+}
+
+.col-min {
+  min-width: 180px;
+}
+
+.divEstado {
+  text-align: center;
+}
+
+.th_b_b {
+  border-top: 0px;
+  border-bottom: solid 2px #d9d9d9 !important;
+}
+
+.tabTh {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.tr_b_b {
+  border-bottom: solid 2px #d9d9d9;
+}
+
+.tr_h_65 {
+  line-height: 40px;
+  height: 65px;
+}
+
+.borrador {
+  background-color: #e6effd;
+  border: 1px solid #e6effd;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+.registrado {
+  background-color: #ffb5c9;
+  border: 1px solid #ffb5c9;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+.revisado {
+  background-color: #faffb5;
+  border: 1px solid #faffb5;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+.aprovado {
+  background-color: #b5ffe0;
+  border: 1px solid #b5ffe0;
+  border-radius: 5px;
+  margin: 5px;
+  text-align: center;
+}
+
+.btnStatus {
+  border: none;
+  background-color: #ffffff00;
+  height: 35px;
+}
+$width: 1200px;
+
+.detalleActividad {
+  width: 100%;
+  overflow-x: auto;
+}
+table {
+  min-width: $width;
+}

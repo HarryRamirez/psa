@@ -1,0 +1,47 @@
+<nav class="navbar topnavbar" role="navigation">
+  <div class="navbar-header header-section">
+    <a routerLink="/proyectos" class="navbar-brand">
+      <div class="brand-logo">
+        <img class="img-fluid" src="assets/img/logo.png" alt="" />
+      </div>
+      <div class="brand-logo-collapsed">
+        <img class="img-fluid" src="assets/img/logo-single.png" alt="" />
+      </div>
+    </a>
+  </div>
+  <span *ngIf="userEmail" class="float-right mlUsr">
+    {{ userEmail }}
+  </span>
+  <!--
+    <ul class="navbar-nav mr-auto flex-row">
+        <li class="nav-item">
+            <a class="nav-link d-none d-md-block d-lg-block d-xl-block" trigger-resize="" (click)="toggleCollapsedSideabar()" *ngIf="!isCollapsedText()">
+                <em class="fas fa-bars"></em>
+            </a>
+            <a class="nav-link sidebar-toggle d-md-none" (click)="
+          settings.toggleLayoutSetting('asideToggled'); $event.stopPropagation()
+        ">
+                <em class="fas fa-bars"></em>
+            </a>
+        </li>
+    </ul>
+    -->
+  <ul class="navbar-nav flex-row" style="display: none">
+    <li class="nav-item d-none d-md-block">
+      <a class="nav-link" #fsbutton (click)="toggleFullScreen($event)">
+        <em class="fa fa-expand"></em>
+      </a>
+    </li>
+  </ul>
+  <app-navsearch
+    [visible]="getNavSearchVisible()"
+    (onclose)="setNavSearchVisible(false)"
+  ></app-navsearch>
+</nav>
+
+<!-- Sección Encabezado Logos Corporativos -->
+<div class="logos-section" *ngIf="showLogosSection">
+  <img class="img-fluid" src="assets/img/logo-psa.png" alt="" />
+  <img class="img-fluid ml-3" src="assets/img/logo-cuidadores.png" alt="" />
+  <img class="img-fluid ml-3" src="assets/img/logo-minambiente.png" alt="" />
+</div>

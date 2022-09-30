@@ -1,0 +1,338 @@
+.background-color-blue {
+  background-color: #e6effd;
+}
+.table {
+  margin: 0px;
+}
+.table th,
+.table tr {
+  border: 1px solid #e6effd;
+  margin: 0px;
+}
+.table td {
+  border: none;
+}
+
+.t-a-l {
+  text-align: left;
+}
+
+.div-content {
+  border: 1px solid #e6effd;
+  text-align: left;
+  padding: 0px;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  // max-width: 500px;
+  margin: 10px auto;
+  // counter-reset: step;
+  width: 100%;
+}
+
+.timeline li {
+  float: left;
+  text-align: center;
+  width: 250px;
+  position: relative;
+}
+
+.timeline li:before {
+  // content: counter(step);
+  // counter-increment: step;
+  line-height: 73px;
+  width: 60px;
+  height: 60px;
+  display: block;
+  border-radius: 100%;
+  border: 1px solid #ccc;
+  margin: 0 auto 15px auto;
+  background: #e6effd;
+}
+
+.timeline li:after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  z-index: -1;
+}
+
+.timeline li:nth-child(1):before {
+  content: url("../../../../assets/img/datosbasicos.png");
+  background-color: #3366cc;
+  // display: list-item;
+  // position: absolute;
+  // margin: 15px 0 0 32px;
+}
+.timeline li:nth-child(2):before {
+  content: url("../../../../assets/img/ubicacion.svg");
+  //background-color: #3366cc;
+}
+
+.timeline li:nth-child(3):before {
+  content: url("../../../../assets/img/proyectoform.svg");
+  //line-height: 80px;
+}
+.timeline li:first-child:before {
+  border-color: #3366cc;
+}
+.timeline li:first-child:after {
+  background: #3366cc;
+}
+
+////---------------------------------------------------------
+
+.timeline2 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  // max-width: 500px;
+  margin: 10px auto;
+  // counter-reset: step;
+  width: 100%;
+}
+
+.timeline2 li {
+  float: left;
+  text-align: center;
+  width: 250px;
+  position: relative;
+}
+
+.timeline2 li:before {
+  // content: counter(step);
+  // counter-increment: step;
+  line-height: 73px;
+  width: 60px;
+  height: 60px;
+  display: block;
+  border-radius: 100%;
+  border: 1px solid #ccc;
+  margin: 0 auto 15px auto;
+  background: #e6effd;
+}
+
+.timeline2 li:after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  z-index: -1;
+}
+
+.timeline2 li:nth-child(1):before {
+  content: url("../../../../assets/img/datosbasicos.png");
+  background-color: #3366cc;
+  // display: list-item;
+  // position: absolute;
+  // margin: 15px 0 0 32px;
+}
+.timeline2 li:nth-child(2):before {
+  content: url("../../../../assets/img/ubicacion.svg");
+  background-color: #3366cc;
+}
+
+.timeline2 li:nth-child(3):before {
+  content: url("../../../../assets/img/proyectoform.svg");
+  //line-height: 80px;
+}
+
+.timeline2 li:first-child:before {
+  border-color: #3366cc;
+}
+.timeline2 li:first-child:after {
+  background: #3366cc;
+}
+.timeline2 li:second-child:after {
+  background: #3366cc;
+}
+
+//////--------------------------------------------------------
+.timeline3 {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  // max-width: 500px;
+  margin: 10px auto;
+  // counter-reset: step;
+  width: 100%;
+}
+
+.timeline3 li {
+  float: left;
+  text-align: center;
+  width: 250px;
+  position: relative;
+}
+
+.timeline3 li:before {
+  // content: counter(step);
+  // counter-increment: step;
+  line-height: 73px;
+  width: 60px;
+  height: 60px;
+  display: block;
+  border-radius: 100%;
+  border: 1px solid #ccc;
+  margin: 0 auto 15px auto;
+  background: #e6effd;
+}
+
+.timeline2 li:after {
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: #ddd;
+  display: block;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  z-index: -1;
+}
+
+.timeline3 li:nth-child(1):before {
+  content: url("../../../../assets/img/datosbasicos.png");
+  background-color: #3366cc;
+  // display: list-item;
+  // position: absolute;
+  // margin: 15px 0 0 32px;
+}
+.timeline3 li:nth-child(2):before {
+  content: url("../../../../assets/img/ubicacion.svg");
+  background-color: #3366cc;
+}
+
+.timeline3 li:nth-child(3):before {
+  content: url("../../../../assets/img/proyectoform.svg");
+  background-color: #3366cc;
+}
+
+.timeline3 li:first-child:before {
+  border-color: #3366cc;
+}
+.timeline3 li:first-child:after {
+  background: #3366cc;
+}
+
+.step1:before {
+  margin-left: 0px !important;
+}
+.step1:after {
+  left: 0% !important;
+}
+.step2:before {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.step2:after {
+  left: 0% !important;
+}
+.step3:before {
+  margin-right: 0px !important;
+}
+.step3:after {
+  left: 0% !important;
+}
+p {
+  font-size: 16px;
+}
+
+.timeline li:last-child:after {
+  content: none;
+}
+
+.timeline li.active {
+  color: #3366cc;
+}
+
+// .timeline li:not(.active) {
+//   border-color: #E6EFFD;
+// }
+
+div.pinContent {
+  background: rgba(255, 171, 1, 0.14) 0% 0% no-repeat padding-box;
+  padding: 20px 30px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+
+div.pinContent p {
+  font-size: 17px;
+  letter-spacing: 0px;
+  color: #4b4b4b;
+  opacity: 1;
+  z-index: 999;
+}
+
+// div.sinDatos {
+//   color: #004884;
+//   text-align: center;
+//   margin: 20px;
+// }
+
+div.accns {
+  margin-left: 50px;
+}
+
+div.accns:nth-last-child(1) {
+  margin-left: 80px;
+}
+
+.csAcc {
+  margin-top: 0.4rem;
+}
+
+.b-l-1 {
+  border-left: 1px solid #e6effd;
+  border-right: 0px;
+  padding: 0px;
+}
+.p-tb-20 {
+  padding: 20px 0px;
+}
+
+.p-l-75 {
+  padding-left: 75px;
+}
+.p-t-25 {
+  padding-top: 25px;
+}
+
+.btnSalir {
+  border-radius: 25px;
+  border-color: #3366cc;
+  color: #3366cc;
+}
+.btnSiguiente {
+  border-radius: 25px;
+  background-color: #3366cc;
+  color: #fff;
+}
+
+.po-fi {
+  position: fixed;
+  right: 0px;
+}
+.exitAnchor {
+  margin-left: 80px;
+  color: #3366cc;
+  text-decoration: underline;
+}

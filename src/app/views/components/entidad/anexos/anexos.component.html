@@ -1,0 +1,197 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white frmBl">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="col-md-8 py-3">
+        <p>
+          Este es el inicio del formulario de registro de proyectos de PSA en el
+          cual podrás diligenciar toda la información correspondiente a tu
+          proyecto.
+        </p>
+      </div>
+    </div>
+
+    <div class="py-2 mb-2">
+      <h3 class="title-color my-3">Cargue de anexos</h3>
+    </div>
+
+    <form
+      [formGroup]="formAnexos"
+      enctype="multipart/form-data"
+      (ngSubmit)="saveAnexos()"
+    >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <strong>74. Información de los predios seleccionados:</strong>
+            <ul>
+              <li>Si es Propietario anexe estos documentos</li>
+              <li>Cédula catastral, dirección</li>
+              <li>Folio de matrícula inmobiliaria,</li>
+              <li>
+                Número de escritura pública y año. En caso de ser poseedores u
+                ocupantes, cargue la información de los certificados
+                correspondientes.
+              </li>
+            </ul>
+            <div class="fileContainer">
+              <input
+                type="file"
+                formControlName="propietario"
+                name="propietario"
+                (change)="onFileChange($event, 'propietario')"
+                accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              />
+              <!-- <div class="text-center">
+                        <img [src]="cedula_catastral" style="width:100px;height:100px;" />
+                     </div> -->
+            </div>
+            <div id="propietario" class="stagedFiles">
+              <div *ngFor="let anexo of arrayAnexosAgregados; index as i">
+                <div
+                  *ngIf="anexo.anexos[0].etiqueta === 'propietario'"
+                  id="{{ anexo.uuid }}"
+                  class="listBubble"
+                >
+                  <span>{{ anexo.anexos[0].nombre }}</span>
+                  <a type="button" (click)="deleteAnexos(anexo.uuid)">X</a>
+                </div>
+              </div>
+              <div [class.mtp]="arrayAnexosAgregados.length > 0">
+                <span>Tipo de archivo permitido .PDF hasta de 2MB</span>
+              </div>
+            </div>
+            <!-- <div *ngIf="frm.propietario.touched && frm.propietario.invalid">
+                     <span *ngIf="frm.propietario.errors?.required">File is required.</span>
+                  </div> -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <strong>75. Información de los predios seleccionados:</strong>
+            <ul>
+              <li>
+                Si es poseedor u ocupante de buena fe: <br />Anexar documentos
+                que certifiquen la sana posesión (ejemplos):
+              </li>
+              <li>Certificado de Juntas de acción comunal o alcaldía</li>
+              <li>Certificado de derecho de uso</li>
+              <li>
+                Certificado de ocupación por parte de la Autoridad Ambiental
+              </li>
+              <li>Título de poseedor regular</li>
+            </ul>
+            <div class="fileContainer">
+              <input
+                type="file"
+                formControlName="ocupante"
+                name="ocupante"
+                (change)="onFileChange($event, 'ocupante')"
+                accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              />
+              <!-- <div class="text-center">
+                        <img [src]="cedula_catastral" style="width:100px;height:100px;" />
+                     </div> -->
+            </div>
+            <div id="ocupante" class="stagedFiles">
+              <div *ngFor="let anexo of arrayAnexosAgregados; index as i">
+                <div
+                  *ngIf="anexo.anexos[0].etiqueta === 'ocupante'"
+                  id="{{ anexo.uuid }}"
+                  class="listBubble"
+                >
+                  <span>{{ anexo.anexos[0].nombre }}</span>
+                  <a type="button" (click)="deleteAnexos(anexo.uuid)">X</a>
+                </div>
+              </div>
+            </div>
+            <div [class.mtp]="arrayAnexosAgregados.length > 0">
+              <span>Tipo de archivo permitido .PDF hasta de 2MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <strong>76. Documento de la formulación del proyecto:</strong>
+            <div class="fileContainer">
+              <input
+                type="file"
+                formControlName="proyecto"
+                name="proyecto"
+                (change)="onFileChange($event, 'proyecto')"
+                accept="image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              />
+              <!-- <div class="text-center">
+                        <img [src]="cedula_catastral" style="width:100px;height:100px;" />
+                     </div> -->
+            </div>
+            <div id="proyecto" class="stagedFiles">
+              <div *ngFor="let anexo of arrayAnexosAgregados; index as i">
+                <div
+                  *ngIf="anexo.anexos[0].etiqueta === 'proyecto'"
+                  id="{{ anexo.uuid }}"
+                  class="listBubble"
+                >
+                  <span>{{ anexo.anexos[0].nombre }}</span>
+                  <a type="button" (click)="deleteAnexos(anexo.uuid)">X</a>
+                </div>
+              </div>
+            </div>
+            <div [class.mtp]="arrayAnexosAgregados.length > 0">
+              <span>Tipo de archivo permitido .PDF hasta de 2MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="loadingfiles" class="mt-5">
+        <div
+          class="spinner-border"
+          style="color: #004884; margin-left: 3em"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <span class="ms-4" style="color: #004884; font-weight: bold"
+          >Subiendo archivos...</span
+        >
+      </div>
+      <div class="my-5">
+        <button
+          type="button"
+          routerLink="/{{ proyecto_id }}/incentivos"
+          class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+          [disabled]="loadingfiles"
+        >
+          Regresar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-pill text-uppercase nxt"
+          [disabled]="arrayAnexosAgregados.length <= 0 || loadingfiles"
+        >
+          Guardar y Continuar
+        </button>
+        <div class="col-12 mt-3 ml-5">
+          <ng-template #disabledLink>
+            <a *ngIf="loadingfiles" class="exitAnchor disabled">SALIR</a>
+          </ng-template>
+          <a
+            *ngIf="!loadingfiles; else disabledLink"
+            [routerLink]="['/incentivos']"
+            class="exitAnchor ml-4"
+            >SALIR</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<footer app-footer></footer>

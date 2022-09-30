@@ -1,0 +1,154 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white frmBl">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="col-md-8 py-3">
+        <p>
+          Este es el inicio del formulario de registro de proyectos de PSA en el
+          cual podrás diligenciar toda la información correspondiente a tu
+          proyecto.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default ShapeBnnr">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-7">
+                <h3 class="title-color mb-3">Recuerda</h3>
+                <p>
+                  Para cargar de una forma correcta el shape file debes seguir
+                  las siguientes indicaciones:
+                </p>
+                <ol>
+                  <li>
+                    Cargar la geodatabase o shape file diligenciado en .zip
+                  </li>
+                  <li>Verificar que cargue completamente</li>
+                </ol>
+              </div>
+              <div class="col-md-3">
+                <img
+                  class="img-fluid ms-5"
+                  src="assets/img/shapes-banner.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="py-2 mb-2">
+      <h3 class="title-color my-3">Shapes</h3>
+    </div>
+
+    <form
+      enctype="multipart/form-data"
+      (ngSubmit)="saveAnexos($event)"
+      #formShapes="ngForm"
+    >
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <strong>77. Información de los predios seleccionados:</strong>
+            <div class="fileContainer">
+              <app-visor
+                (addShape)="addShape($event)"
+                (addGeoJSON)="addGeoJSON($event)"
+                [setGeoJson]="setGeoJson"
+              ></app-visor>
+            </div>
+            <div id="shapesID" class="stagedFiles">
+              <div
+                *ngFor="let anexo of arrayShapesAdded; index as i"
+                id="{{ anexo.uuid }}"
+                class="d-inline me-3 bubbleListShapes"
+              >
+                <span class="me-2">{{ anexo.anexos[0].nombre }}</span>
+                <a type="button" (click)="deleteAnexos(anexo.uuid)">X</a>
+              </div>
+              <div [class.mtp]="arrayShapesAdded.length > 0">
+                <span>Tipo de archivo permitido .ZIP hasta de 2MB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label
+              >78. Fuente de Información Utilizada para el Levantamiento de los
+              Shapes de los Predios para el Proyecto</label
+            >
+            <select
+              id="fuente_shape"
+              name="fuente"
+              [(ngModel)]="fuenteSelected"
+              class="form-control form-select"
+            >
+              <option value="" selected disabled hidden>Escoger</option>
+              <option *ngFor="let fuente of fuentesShape" [value]="fuente.item">
+                {{ fuente.traduccion }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <div class="card card-default visor">
+            <div id="visor1"></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="loadingfiles" class="mt-5">
+        <div
+          class="spinner-border"
+          style="color: #004884; margin-left: 3em"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <span class="ms-4" style="color: #004884; font-weight: bold"
+          >Subiendo archivos...</span
+        >
+      </div>
+      <div class="my-5">
+        <button
+          type="button"
+          [routerLink]="['/anexos']"
+          class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+          [disabled]="loadingfiles"
+        >
+          Regresar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary rounded-pill text-uppercase nxt"
+          [disabled]="arrayShapesAdded.length <= 0 || loadingfiles"
+        >
+          Enviar Proyecto
+        </button>
+        <div class="col-12 mt-3 ml-5">
+          <ng-template #disabledLink>
+            <a *ngIf="loadingfiles" class="exitAnchor disabled">SALIR</a>
+          </ng-template>
+          <a
+            *ngIf="!loadingfiles; else disabledLink"
+            [routerLink]="['/anexos']"
+            class="exitAnchor ml-4"
+            >SALIR</a
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<footer app-footer></footer>

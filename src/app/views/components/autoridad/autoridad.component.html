@@ -1,0 +1,142 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-sidebar class="aside-container"></app-sidebar>
+  <section class="section-container">
+    <div class="content-wrapper background-color-white">
+      <div class="headerContent row">
+        <div class="col-7">
+          <h2 class="title-color mt-2">Proyectos de las Entidades</h2>
+        </div>
+      </div>
+      <table class="table mt-5 misProyectosTable" id="tabla1">
+        <thead>
+          <tr
+            class="text-center background-color-blue title-color"
+            style="margin-top: 5px; padding-top: 5px"
+          >
+            <th
+              class="l-h-45"
+              scope="col"
+              sortable="estado"
+              (sort)="onSort($event)"
+            >
+              Estado
+            </th>
+            <th
+              class="l-h-45"
+              scope="col"
+              sortable="nombre"
+              (sort)="onSort($event)"
+            >
+              Nombre proyecto
+            </th>
+            <th
+              class="l-h-45"
+              scope="col"
+              sortable="id"
+              (sort)="onSort($event)"
+            >
+              ID de Proyecto
+            </th>
+            <th
+              class="l-h-45"
+              scope="col"
+              sortable="fecha_registro"
+              (sort)="onSort($event)"
+            >
+              Fecha de Registro
+            </th>
+            <th
+              class="l-h-45"
+              scope="col"
+              sortable="fecha_registro"
+              (sort)="onSort($event)"
+            >
+              Correcciones / Observaciones
+            </th>
+            <th class="l-h-45" scope="col" colspan="2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="mostrarTabla">
+          <tr class="text-center" *ngFor="let proyecto of dataTable">
+            <td class="b-l-1 l-h-75">
+              <strong>
+                <span
+                  [attr.class]="
+                    proyecto['estado'] == 'registrado'
+                      ? 'badge badge-success'
+                      : proyecto['estado'] == 'en construcción'
+                      ? 'badge badge-warning'
+                      : proyecto['estado'] == 'rechazado'
+                      ? 'badge badge-danger'
+                      : proyecto['estado'] == 'borrador'
+                      ? 'badge badge-info'
+                      : 'badge badge-secondary'
+                  "
+                  >{{ proyecto['traduccion'] }}</span
+                >
+              </strong>
+            </td>
+            <td class="b-rl-0 l-h-75 t-a-l">
+              <strong>{{ proyecto['nombre'] }}</strong>
+            </td>
+            <td class="b-rl-0 l-h-75">
+              <strong>{{ proyecto['id'] }}</strong>
+            </td>
+            <td class="b-rl-0 l-h-75">
+              {{ proyecto['fecha_registro'] | date: 'yyyy/MM/dd' }}
+            </td>
+            <td class="b-rl-0 l-h-75">
+              <div *ngIf="proyecto['observaciones'] > 0">
+                <strong>{{ proyecto['correcciones'] }}</strong> /
+                {{ proyecto['observaciones'] }}
+              </div>
+            </td>
+            <td
+              class="b-r-1 l-h-75 t-a-l"
+              *ngIf="
+                proyecto['estado'] === 'revisado' ||
+                proyecto['estado'] === 'aprobado' ||
+                proyecto['estado'] === 'rechazado'
+              "
+            >
+              <button
+                (click)="seeViewDetails(proyecto)"
+                type="button"
+                class="btn btn-outline-primary rounded-pill text-uppercase"
+              >
+                <strong class="f-s-12">VER DETALLE</strong>
+              </button>
+            </td>
+            <td
+              class="b-r-1 l-h-75 t-a-l"
+              *ngIf="proyecto['estado'] === 'registrado'"
+            >
+              <button
+                type="button"
+                class="btn btn-outline-danger rounded-pill text-uppercase"
+              >
+                <strong class="f-s-12">REVISAR</strong>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-center p-2" *ngIf="mostrarTabla"></div>
+      <span *ngIf="!mostrarTabla">
+        <h3 class="text-center title-color mt-5">
+          Actualmente usted no cuenta con proyectos registrados en el sistema
+        </h3>
+        <h4 class="text-center description-color mt-3">
+          Si desea registrar su proyecto presione el botón "Registrar Proyecto"
+        </h4>
+      </span>
+    </div>
+  </section>
+  <footer
+    class="margin-top-no-info"
+    app-footer
+    *ngIf="!mostrarTabla || proyectoData.length < 10"
+  ></footer>
+  <footer app-footer *ngIf="mostrarTabla && proyectoData.length >= 10"></footer>
+</div>

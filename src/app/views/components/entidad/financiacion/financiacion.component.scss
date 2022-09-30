@@ -1,0 +1,43 @@
+.tbl {
+  font-weight: bold;
+}
+
+.addElementsTable {
+  width: max-content;
+  position: absolute;
+  bottom: 18px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  display: inline-flex;
+}
+
+li {
+  background-color: #e6effd;
+  border-radius: 17px;
+  width: max-content;
+  padding: 3px 13px;
+  margin: 10px;
+  color: #6c6c6c;
+  font-size: 12px;
+
+  span {
+    color: #3366cc;
+    cursor: pointer;
+    margin-left: 3px;
+    font-weight: bold;
+  }
+}
+
+li:first-child {
+  margin-left: 0;
+}
+
+.addNewDepto {
+  color: #3366cc;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 2.2rem !important;
+}

@@ -1,0 +1,12 @@
+<file-pond
+  #myPond
+  [options]="pondOptions"
+  (oninit)="pondHandleInit()"
+  (onaddfile)="pondHandleAddFile($event)"
+  (onactivatefile)="pondHandleActivateFile($event)"
+  (onaddfilestart)="onFileStart($event)"
+  (onprocessfilestart)="onProcessFileStart($event)"
+  (onprocessfile)="onProcessFile($event)"
+  (onpreparefile)="onPrepareFile($event)"
+  (onremovefile)="onRemoveFile($event)"
+></file-pond>

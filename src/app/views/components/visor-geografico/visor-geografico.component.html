@@ -1,0 +1,421 @@
+<app-header></app-header>
+<div class="contenedor">
+  <div class="filtros">
+    <div class="divFiltro">
+      <p class="text_w">FILTROS</p>
+      <div *ngIf="loading">
+        <div
+          class="spinner-border"
+          style="color: #fff; width: 15px; height: 15px; margin-left: auto"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+        <span
+          style="
+            color: #fff;
+            font-weight: bold;
+            font-size: smaller;
+            margin-left: 5px;
+            margin-right: 5px;
+          "
+          >Cargando...</span
+        >
+      </div>
+      <button (click)="aplicarSeleccion()">Aplicar</button>
+    </div>
+    <accordion [isAnimated]="true" [closeOthers]="true">
+      <accordion-group (click)="oneAcor()" (click)="isOne = !isOne">
+        <button
+          class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none"
+          accordion-heading
+          type="button"
+        >
+          <div id="ac1" class="pull-left float-left font-color-g">
+            DATOS BÁSICOS
+          </div>
+          <span id="one" class="float-right pull-right pi-down"></span>
+        </button>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="divSelect">
+                <label for=""><b class="f-s-11">Año:</b></label>
+                <select
+                  class="form-control f-s-11"
+                  id="annio"
+                  name="annio"
+                  (change)="getAnnio($event)"
+                >
+                  <option *ngFor="let annios2 of annios" [value]="annios2">
+                    {{ annios2 }}
+                  </option>
+                </select>
+              </div>
+              <div class="divSelect">
+                <label for=""><b class="f-s-11">Etapa:</b></label>
+                <select
+                  class="form-control f-s-11"
+                  id="etapa"
+                  name="etapa"
+                  (change)="getEtapa($event)"
+                >
+                  <option value="" selected disabled hidden>Escoger</option>
+                  <option
+                    *ngFor="let acciones of etapas_proyecto"
+                    [value]="acciones.item"
+                  >
+                    {{ acciones.traduccion }}
+                  </option>
+                </select>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Tipo de proyecto:</label>
+                <select class="form-control f-s-11" (change)="getTipo($event)">
+                  <option value="" selected disabled hidden>Escoger</option>
+                  <option
+                    *ngFor="let etapas of tipos_proyecto"
+                    [value]="etapas.item"
+                  >
+                    {{ etapas.traduccion }}
+                  </option>
+                </select>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Modalidades:</label>
+                <select
+                  class="form-control f-s-11"
+                  (change)="getModalidad($event)"
+                >
+                  <option value="" selected>Escoger</option>
+                  <option
+                    *ngFor="let modalidad of modalidades_proyecto"
+                    [value]="modalidad.item"
+                  >
+                    {{ modalidad.traduccion }}
+                  </option>
+                </select>
+                <ul>
+                  <li *ngFor="let modalidad2 of modalidad; let j = index">
+                    {{ modalidad2.traduccion }}
+                    <span (click)="delModalidad(j)">X</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Acciones de reconocimiento:</label>
+                <select
+                  class="form-control f-s-11"
+                  (change)="getReconocimiento($event)"
+                >
+                  <option value="" selected disabled hidden>Escoger</option>
+                  <option
+                    *ngFor="let tiposE of acciones_reconocimiento"
+                    [value]="tiposE.item"
+                  >
+                    {{ tiposE.traduccion }}
+                  </option>
+                </select>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Tipos de implementadores:</label>
+                <select
+                  class="form-control f-s-11"
+                  (change)="getImplementadores($event)"
+                >
+                  <option value="" selected>Escoger</option>
+                  <option
+                    *ngFor="let tiposP of tipos_entidad"
+                    [value]="tiposP.item"
+                  >
+                    {{ tiposP.traduccion }}
+                  </option>
+                </select>
+                <ul>
+                  <li
+                    *ngFor="
+                      let implementadores2 of implementadores;
+                      let j = index
+                    "
+                  >
+                    {{ implementadores2.traduccion }}
+                    <span (click)="delImplementadores(j)">X</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Autoridades ambientales:</label>
+                <select
+                  class="form-control f-s-11"
+                  (change)="getAutoridades($event)"
+                >
+                  <option value="" selected>Escoger</option>
+                  <option
+                    *ngFor="let autoridades of listAutoridadesEnum"
+                    [value]="autoridades.codigo"
+                  >
+                    {{ autoridades.nombre }}
+                  </option>
+                </select>
+                <ul>
+                  <li *ngFor="let autoridades2 of autoridades; let j = index">
+                    {{ autoridades2.nombre }}
+                    <span (click)="delAutoridades(j)">X</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </accordion-group>
+      <accordion-group (click)="twoAcor()" (click)="isTwo = !isTwo">
+        <button
+          class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none"
+          accordion-heading
+          type="button"
+        >
+          <div id="ac2" class="pull-left float-left font-color-g">
+            UBICACIONES
+          </div>
+          <span id="two" class="float-right pull-right pi-down"></span>
+        </button>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="divSelect">
+                <label for=""><b class="f-s-11">Departamentos:</b></label>
+                <select class="form-control f-s-11" (change)="getDep($event)">
+                  <option value="" selected>Escoger</option>
+                  <option
+                    *ngFor="let departamentos of listaDepartamentos"
+                    [value]="departamentos.codigo"
+                  >
+                    {{ departamentos.nombre }}
+                  </option>
+                </select>
+              </div>
+              <div class="divSelect">
+                <label for="" class="f-s-11">Municipios:</label>
+                <select
+                  class="form-control f-s-11"
+                  (change)="getMunicipios($event)"
+                >
+                  <option value="" selected>Escoger</option>
+                  <option
+                    *ngFor="let listaMunicipios2 of listaMunicipios"
+                    [value]="listaMunicipios2.codigo"
+                  >
+                    {{ listaMunicipios2.nombre }}
+                  </option>
+                </select>
+                <ul>
+                  <li *ngFor="let depMuni2 of depMuni; let j = index">
+                    <b *ngIf="depMuni2.dep">{{ depMuni2.dep }} -</b>
+                    {{ depMuni2.nombre }}
+                    <span (click)="delMunDep(j)">X</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <label for="" class="f-s-11">Hectáreas PSA:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min1"
+            [(highValue)]="max1"
+            [options]="options1"
+          ></ngx-slider>
+        </div>
+        <label for="" class="f-s-11">Costo de oportunidad:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min2"
+            [(highValue)]="max2"
+            [options]="options2"
+          ></ngx-slider>
+        </div>
+        <label for="" class="f-s-11">Valor del incentivo:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min3"
+            [(highValue)]="max3"
+            [options]="options3"
+          ></ngx-slider>
+        </div>
+      </accordion-group>
+      <accordion-group (click)="threeAcor()" (click)="isThree = !isThree">
+        <button
+          class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none"
+          accordion-heading
+          type="button"
+        >
+          <div id="ac3" class="pull-left float-left font-color-g">
+            FINANCIACIÓN
+          </div>
+          <span id="three" class="float-right pull-right pi-down"></span>
+        </button>
+        <label for="" class="f-s-11">Valor total del proyecto:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min4"
+            [(highValue)]="max4"
+            [options]="options4"
+          ></ngx-slider>
+        </div>
+        <label for="" class="f-s-11">Total de incentivos:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min5"
+            [(highValue)]="max5"
+            [options]="options5"
+          ></ngx-slider>
+        </div>
+        <div class="divSelect">
+          <label for="" class="f-s-11">Tipos de financiación:</label>
+          <select
+            class="form-control f-s-11"
+            (change)="getFinanciacion($event)"
+          >
+            <option value="" selected>Escoger</option>
+            <option
+              *ngFor="let tipos_financiacion2 of tipos_financiacion"
+              [value]="tipos_financiacion2.item"
+            >
+              {{ tipos_financiacion2.traduccion }}
+            </option>
+          </select>
+          <ul>
+            <li *ngFor="let financiacion2 of financiacion; let j = index">
+              {{ financiacion2.traduccion }}
+              <span (click)="delFinanciacion(j)">X</span>
+            </li>
+          </ul>
+        </div>
+      </accordion-group>
+      <accordion-group (click)="fourAcor()" (click)="isFour = !isFour">
+        <button
+          class="btn btn-link btn-block justify-content-between d-flex w-100 shadow-none"
+          accordion-heading
+          type="button"
+        >
+          <div id="ac4" class="pull-left float-left font-color-g">
+            BENEFICIARIOS
+          </div>
+          <span id="four" class="float-right pull-right pi-down"></span>
+        </button>
+        <label for="" class="f-s-11">Total familias beneficiadas:</label>
+        <div class="custom-slider">
+          <p *ngIf="!bandera">Cargando...</p>
+          <ngx-slider
+            *ngIf="bandera"
+            [(value)]="min6"
+            [(highValue)]="max6"
+            [options]="options6"
+          ></ngx-slider>
+        </div>
+        <div class="divSelect">
+          <label for="" class="f-s-11"
+            >Nivel promedio de ingresos por familia:</label
+          >
+          <select class="form-control f-s-11" (change)="getIngFam($event)">
+            <option value="" selected disabled hidden>Escoger</option>
+            <option
+              *ngFor="let promedio of promedio_ingresos"
+              [value]="promedio.item"
+            >
+              {{ promedio.traduccion }}
+            </option>
+          </select>
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+  <div class="visor">
+    <div>
+      <tabset>
+        <tab
+          heading="Visor Geográfico"
+          id="tab1"
+          (selectTab)="onSelect($event)"
+        >
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta modi
+            doloremque tenetur, architecto fugiat voluptate. Eius quisquam
+            earum, minus eos rerum dignissimos! Deserunt quae, eum quasi
+            delectus est eaque velit!
+          </p>
+        </tab>
+        <tab
+          heading="Gráficas del visor Geográfico"
+          id="tab2"
+          (selectTab)="onSelect($event)"
+        >
+          <div class="graficas">
+            <div class="row m_tb_25">
+              <canvas id="myChart3"></canvas>
+            </div>
+            <div *ngIf="buttonChart3" class="d_center">
+              <button
+                class="btn btn-secondary rounded-pill mr-1 azul px-3"
+                (click)="izquierdaH()"
+              >
+                Atras
+              </button>
+              <button
+                class="btn btn-secondary rounded-pill mr-1 azul px-3"
+                (click)="derechaH()"
+              >
+                Siguiente
+              </button>
+            </div>
+            <div class="row m_tb_25">
+              <canvas id="myChart4"></canvas>
+            </div>
+            <div *ngIf="buttonChart4" class="d_center">
+              <button
+                class="btn btn-secondary rounded-pill mr-1 azul px-3"
+                (click)="izquierdaB()"
+              >
+                Atras
+              </button>
+              <button
+                class="btn btn-secondary rounded-pill mr-1 azul px-3"
+                (click)="derechaB()"
+              >
+                Siguiente
+              </button>
+            </div>
+            <div
+              class="row m_tb_25"
+              style="margin: auto; height: 600px; width: 600px"
+            >
+              <div class="">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+            <div
+              class="row m_tb_25"
+              style="margin: auto; height: 600px; width: 600px"
+            >
+              <div>
+                <canvas id="myChart2"></canvas>
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>
+<footer app-footer></footer>

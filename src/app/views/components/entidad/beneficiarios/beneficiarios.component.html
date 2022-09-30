@@ -1,0 +1,233 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="py-3 col-md-10">
+        <p>
+          Este es el inicio del formulario de registro de proyectos de PSA en el
+          cual podrás diligenciar toda la información correspondiente a tu
+          proyecto.
+        </p>
+      </div>
+
+      <!-- <div class="row linea inv">
+                <ul class='timeline'>
+                    <li class='active'>Datos básicos</li>
+                    <li>Etapa</li>
+                    <li>Proyecto</li>
+                    <li>Proyecto</li>
+                </ul>
+            </div> -->
+    </div>
+
+    <div class="row">
+      <div class="py-2">
+        <h3 class="title-color my-1">Beneficiarios</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="mt-2">
+        <div class="row">
+          <div class="col-md-8">
+            <p class="card-text descEtapa">
+              Relacione todas las personas que se vean beneficiadas con el
+              desarrollo de su proyecto. Recuerde que el campo (18) es la
+              sumatoria de las familias relacionadas en la tabla anterior de
+              "Ubicación" y esta debe ser igual a la suma de los campos (19) al
+              (24).
+            </p>
+          </div>
+        </div>
+        <br />
+
+        <form (ngSubmit)="checkFormStatus()" #formBeneficiarios="ngForm">
+          <div class="row mt-2">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="" class="readOnlyField"
+                  >18. Número Total de Familias Benficiarias del Proyecto ({{
+                    total_familias_ubicacion
+                  }})</label
+                >
+                <input
+                  type="number"
+                  name="total_familias"
+                  class="form-control"
+                  placeholder="Ej. 123"
+                  [ngModel]="datoAgregar?.total_familias"
+                  [ngStyle]="
+                    total_familias_ubicacion != datoAgregar.total_familias
+                      ? { color: 'red', 'font-weight': 'bold' }
+                      : { color: '#495057', 'font-weight': 'normal' }
+                  "
+                  required
+                  readonly
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >19. Número de Familias Beneficiarias Campesinas del Proyecto
+                  *</label
+                >
+                <input
+                  type="number"
+                  name="num_familias_beneficiadas_campesina"
+                  class="form-control"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  [(ngModel)]="datoAgregar.num_familias_beneficiadas_campesina"
+                  min="0"
+                  required
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >20. Número de Familias Indígenas Beneficiarias del Proyecto
+                  *</label
+                >
+                <input
+                  type="number"
+                  name="num_familias_beneficiadas_indigena"
+                  class="form-control"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  [(ngModel)]="datoAgregar.num_familias_beneficiadas_indigena"
+                  required
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >21. Número de Familias Afrodescendientes Beneficiarias del
+                  Proyecto *</label
+                >
+                <input
+                  type="number"
+                  name="num_familias_beneficiadas_afro"
+                  class="form-control"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  [(ngModel)]="datoAgregar.num_familias_beneficiadas_afro"
+                  min="0"
+                  required
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >22. Número de Familias Beneficiarias de Otros Grupos
+                  Poblacionales *</label
+                >
+                <input
+                  type="number"
+                  name="num_familias_beneficiadas_otras"
+                  class="form-control"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  [(ngModel)]="datoAgregar.num_familias_beneficiadas_otras"
+                  min="0"
+                  required
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >23. Número de Mujeres Beneficiarias del Proyecto</label
+                >
+                <input
+                  type="number"
+                  name="num_hombres_beneficiados"
+                  class="form-control"
+                  [(ngModel)]="datoAgregar.num_hombres_beneficiados"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  min="0"
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >24. Número de Hombres Beneficiarios del Proyecto</label
+                >
+                <input
+                  type="number"
+                  name="num_mujeres_beneficiadas"
+                  class="form-control"
+                  [(ngModel)]="datoAgregar.num_mujeres_beneficiadas"
+                  (input)="setTotalFamilias()"
+                  placeholder="Ej. 123"
+                  min="0"
+                />
+                <!-- <span class="form-text text-danger">Debe de ser de 400 caracteres como máximo</span> -->
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for=""
+                  >25. Nivel promedio del Ingreso de las Familias Beneficiarias
+                  del Proyecto *</label
+                >
+                <select
+                  name="nivel_ingreso_promedio_familia"
+                  [(ngModel)]="datoAgregar.nivel_ingreso_promedio_familia"
+                  class="form-control form-select"
+                  required
+                >
+                  <option value="" selected disabled hidden>Escoger</option>
+                  <option
+                    *ngFor="let nivel of listNivelesIngreso"
+                    [value]="nivel.item"
+                  >
+                    {{ nivel.traduccion }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="my-5">
+            <a
+              type="button"
+              routerLink="/{{ idProyecto }}/ubicacion"
+              class="btn btn-secondary rounded-pill mr-4 backEtapa px-3"
+            >
+              REGRESAR
+            </a>
+            <button
+              type="submit"
+              [disabled]="formBeneficiarios.invalid"
+              class="btn btn-primary rounded-pill"
+              style="border-radius: 5px; background-color: #3366cc"
+            >
+              GUARDAR Y CONTINUAR
+            </button>
+            <div class="col-12 mt-3 ml-5">
+              <a routerLink="/proyectos" class="exitAnchor ml-4"> SALIR </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<footer app-footer></footer>

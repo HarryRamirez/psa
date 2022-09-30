@@ -1,0 +1,6 @@
+<app-upload-local-file
+  [acceptedFileTypes]="['application/zip']"
+  [expectedTypes]="['ZIP']"
+  [expectedTypesMap]="{ 'application/zip': '.zip' }"
+  (fileAdded)="fileAdded($event)"
+></app-upload-local-file>

@@ -1,0 +1,363 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <div class="container background-color-white">
+    <div class="row">
+      <div class="pt-4">
+        <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+      </div>
+      <div class="py-3 pr-5">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi ad,
+          fugiat non, sunt accusamus debitis quos quod qui dicta dignissimos
+          quia temporibus, nulla doloremque officiis quisquam nemo magni rerum
+          praesentium.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="py-2">
+        <h3 class="title-color my-2">Financiación y Actores</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="row d-block">
+            <h4 class="title-color mt-2 d-block">
+              Actores involucrados en el Proyecto
+            </h4>
+            <p class="card-text d-block">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+          </div>
+          <br />
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">9. Actores involucrados en el Proyecto</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="ActorInput"
+                  (keyup)="displaySpanErrorActor = false"
+                  name="actor_input"
+                  maxlength="400"
+                  placeholder="Ej. Nombre autoridad"
+                />
+                <span
+                  class="form-text text-danger"
+                  *ngIf="displaySpanErrorActor"
+                  >Digite una opción válida</span
+                >
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary rounded-pill text-uppercase addElementsTable"
+                  (click)="addActor()"
+                >
+                  Agregar Actores involucrados
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <table class="table my-5">
+            <thead style="background-color: #e6effd">
+              <tr>
+                <th class="title-color tbl">Número de Actores</th>
+                <th class="title-color tbl">Actores involucrados</th>
+                <th class="title-color tbl">Acción</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="actoresAgregados?.length > 0; else sinActores">
+              <tr *ngFor="let datos of actoresAgregados; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>
+                  {{ datos }}
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn rounded-pill removeElementsTable"
+                    (click)="removeActor(i)"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ng-template #sinActores>
+            <tbody>
+              <tr>
+                <td colspan="10">
+                  <div class="sinDatos">
+                    <h4>No se han registrado Actores</h4>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 d-inblock mt-5">
+        <h4 class="title-color mt-2">Potenciales fuentes de financiación</h4>
+        <p class="card-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="form-group">
+          <label for="">10. Potenciales fuentes de Financiación</label>
+          <select
+            name="fuentes_financiacion"
+            class="form-control form-select"
+            (change)="changeFuente($event)"
+            ngModel
+            required
+          >
+            <option value="" selected disabled hidden>Escoger</option>
+            <option
+              *ngFor="let fuente of fuentesDeFinanciacion"
+              [value]="fuente.item"
+            >
+              {{ fuente.traduccion }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="gobernacion" *ngIf="verDepartamenos">
+        <div class="col-md-12 d-inblock mt-3">
+          <h4 class="title-color mt-2">Nombre Gobernación</h4>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div class="col-md-6 mt-4">
+          <div class="form-group">
+            <label for="">11. Gobernación</label>
+            <select
+              name="departamentos"
+              class="form-control form-select"
+              id="selectDepartamentosP"
+              (change)="changeDepartamento($event)"
+              #slGobernacion
+              ngModel
+              required
+            >
+              <option value="" selected disabled hidden>Escoger</option>
+              <option
+                *ngFor="let departamento of listaDepartamentos"
+                [value]="departamento.codigo"
+              >
+                {{ departamento.nombre }}
+              </option>
+            </select>
+          </div>
+          <ul>
+            <li
+              *ngFor="let gobernacion of departamentosAgregados; let j = index"
+            >
+              {{ gobernacion }}
+              <span (click)="removeDepartamento(j); slGobernacion.value = ''"
+                >x</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="municipios" *ngIf="verMunicipio">
+        <div class="col-md-12 d-inblock mt-4">
+          <h4 class="title-color mt-2">Nombre de Departamentos y Municipios</h4>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mt-4">
+            <div class="form-group">
+              <label for="">11. Departamento</label>
+              <select
+                name="departamentos"
+                class="form-control form-select"
+                id="selectDepartamentos"
+                (change)="changeDepartamento($event)"
+                #slGobernacion
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let departamento of listaDepartamentos"
+                  [value]="departamento.codigo"
+                >
+                  {{ departamento.nombre }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 mt-4">
+            <div class="form-group">
+              <label for="">11. Municipio</label>
+              <select
+                name="municipios"
+                class="form-control form-select"
+                id="selectMunicipios"
+                (change)="changeMunicipio($event)"
+                #slMunicipio
+                required
+              >
+                <option value="" selected disabled hidden>Escoger</option>
+                <option
+                  *ngFor="let municipio of listaMunicipios"
+                  [value]="municipio.codigo"
+                >
+                  {{ municipio.nombre }}
+                </option>
+              </select>
+            </div>
+            <ul
+              *ngFor="
+                let municipio of municipiosYdepartamentosAgregados;
+                let h = index
+              "
+            >
+              <li>
+                {{ municipio }}
+                <span
+                  (click)="
+                    removeDepartamentoAndMunicipio(h);
+                    slGobernacion.value = '';
+                    slMunicipio.value = ''
+                  "
+                  >x</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="otro" *ngIf="verOtraOpcion">
+        <div class="col-md-12 d-inblock mt-4">
+          <h4 class="title-color mt-2">Nombre Gobernación</h4>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div class="col-md-6 mt-4">
+          <div class="form-group">
+            <label for="">11. Nombre de la Fuente de Financiamiento</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="otraFuente"
+              name="otra_fuente"
+              maxlength="400"
+              placeholder="Ej. Nombre de la Fuente"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <br />
+      <div class="col-md-6 mt-5">
+        <div class="form-group">
+          <button
+            type="button"
+            class="btn btn-outline-primary rounded-pill text-uppercase addElementsTable"
+            (click)="addFuente()"
+          >
+            Agregar Potenciales Fuentes de Financiación
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <table class="table my-5">
+        <thead style="background-color: #e6effd">
+          <tr>
+            <th class="title-color">Número de Fuentes de Financiación</th>
+            <th class="title-color">Fuentes de Financiación</th>
+            <th class="title-color">Nombre de Financiación</th>
+            <th class="title-color">Acción</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="fuentesAgregadas?.length > 0; else sinFuentes">
+          <tr *ngFor="let datos of fuentesAgregadas; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              {{ datos.fuente }}
+            </td>
+            <td>
+              <p style="white-space: pre-wrap">{{ datos.nombre }}</p>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn rounded-pill removeElementsTable"
+                (click)="removeFuente(i)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <ng-template #sinFuentes>
+        <tbody>
+          <tr>
+            <td colspan="10">
+              <div class="sinDatos">
+                <h4>No se han registrado Fuentes</h4>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </div>
+
+    <div class="my-5">
+      <a
+        type="button"
+        routerLink="/{{ idProyecto }}/ubicacion"
+        class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+      >
+        Regresar
+      </a>
+      <button
+        type="button"
+        (click)="guardarFuentes()"
+        class="btn btn-primary rounded-pill text-uppercase nxt"
+        [disabled]="
+          actoresAgregados?.length <= 0 || arrayFuentesAgregadas?.length <= 0
+        "
+      >
+        Enviar Proyecto
+      </button>
+      <div class="col-12 mt-3 ml-5">
+        <a routerLink="/proyectos" class="exitAnchor ml-4"> SALIR </a>
+      </div>
+    </div>
+  </div>
+</div>

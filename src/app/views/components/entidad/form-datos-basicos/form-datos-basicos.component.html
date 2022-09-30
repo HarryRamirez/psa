@@ -1,0 +1,444 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <app-header-proyectos></app-header-proyectos>
+
+  <section class="">
+    <div class="container background-color-white">
+      <div class="row">
+        <div class="col-md-12 pt-4">
+          <h2 class="title-color mt-2">Formulario de Registro de Proyecto</h2>
+          <div class="row py-3">
+            <p class="col-md-8">
+              Este es el inicio del formulario de registro para proyectos de
+              PSA. En el, podrá diligenciar toda la información correspondiente
+              a su proyecto.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="pinContent col-md-10">
+          <p>
+            Recuerda que el proyecto que estas a punto de registrar debe ser
+            diseñado (fase factibilidad) o implementado entre el 01 de enero del
+            2022 a 31 de diciembre del 2022
+          </p>
+        </div>
+      </div>
+
+      <br />
+
+      <form (ngSubmit)="checkFormStatus()" #formDatosBasicos="ngForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="py-2">
+              <h3 class="title-color my-2">Datos básicos</h3>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="">1. Nombre del Proyecto*</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="proyecto.nombre"
+                    name="nombre_proyecto"
+                    id=""
+                    placeholder="Ej. Proyecto 1"
+                    required
+                    maxlength="128"
+                  />
+                  <!-- formControlName="nombre" -->
+                  <span class="form-text text-danger" *ngIf="nombreValido()"
+                    >Debe de ser de 400 caracteres como máximo</span
+                  >
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="">2. Año de implementación del Proyecto</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ proyecto.annio }}"
+                    readonly
+                  />
+                </div>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="row">
+              <div class="col-md-10 cardForm">
+                <div class="content-title">
+                  <h4 style="color: #004884">Autoridad Ambiental</h4>
+                </div>
+                <div class="row mb-2">
+                  <p class="col-md-9 descEtapaAlternative">
+                    Ingrese el nombre de las Autoridades Ambientales
+                    pertenecientes a su proyecto y haga clic en el botón
+                    "Agregar Autoridad Ambiental" para agregarlas.
+                  </p>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="">3. Nombre Autoridad Ambiental*</label>
+                      <select
+                        class="form-control form-select"
+                        id="AutoridadSelectedName"
+                        name="AutoridadSelectedName"
+                        (change)="getAutoridadValueSelected($event)"
+                      >
+                        <option value="" selected disabled hidden>
+                          Elegir Autoridad
+                        </option>
+                        <option
+                          *ngFor="let autoridad of listAutoridadesEnum"
+                          [value]="autoridad.codigo"
+                        >
+                          {{ autoridad.nombre }}
+                        </option>
+                      </select>
+                      <span
+                        class="form-text text-danger"
+                        *ngIf="displaySpanError"
+                        >Debe seleccionar una opción válida</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary rounded-pill float-end text-uppercase addElementsTable"
+                        (click)="addAutoridad()"
+                      >
+                        Agregar Autoridad
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table">
+                  <thead style="background-color: #e6effd">
+                    <tr>
+                      <th style="color: #004884">No</th>
+                      <th style="color: #004884">Nombre Autoridad Ambiental</th>
+                      <th style="color: #004884">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    *ngIf="
+                      proyecto.autoridades && proyecto.autoridades.length > 0;
+                      else noBorrado
+                    "
+                  >
+                    <tr
+                      *ngFor="
+                        let autoridad of proyecto.autoridades;
+                        let i = index
+                      "
+                    >
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ autoridad.nombre }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn rounded-pill removeElementsTable text-uppercase"
+                          (click)="removeAutoridad(i, autoridad)"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noBorrado>
+          <tbody>
+            <tr>
+              <td colspan="3">
+                <div class="sinDatos">
+                  <h4>
+                    Actualmente no se ha registrado Autoridades Ambientales
+                  </h4>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </ng-template>
+
+        <div class="row">
+          <div class="col-md-12 mt-5">
+            <h3 class="title-color">Datos del Proyecto</h3>
+            <div class="row mb-4">
+              <p class="col-md-6 descEtapaAlternative">
+                A continuación encontrará una lista desplegable con 3 opciones.
+                Dependiendo de la etapa en la que se encuentre su proyecto, se
+                le solicitará la información correspondiente.
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="">4. Etapa del Proyecto *</label>
+                  <select
+                    id="etapa"
+                    name="etapa"
+                    [(ngModel)]="proyecto.etapa"
+                    class="form-control form-select"
+                    (change)="switchProyectoType($event)"
+                    required
+                  >
+                    <option value="" selected disabled hidden>Escoger</option>
+                    <option
+                      *ngFor="let etapa of etapas_proyecto"
+                      [value]="etapa.item"
+                    >
+                      {{ etapa.traduccion }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="preinversion" class="col-md-4">
+                <div class="form-group">
+                  <label for="">5. Tipo de Proyecto *</label>
+                  <select
+                    name="tipo_proyecto"
+                    id="tipo_proyecto"
+                    [(ngModel)]="proyecto.tipo"
+                    class="form-control form-select"
+                    required
+                  >
+                    <option value="" selected disabled hidden>Escoger</option>
+                    <option
+                      *ngFor="let tipo of tipo_proyecto"
+                      [value]="tipo.item"
+                    >
+                      {{ tipo.traduccion }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="inversion" class="col-md-4">
+                <div class="form-group">
+                  <label for="">5. Nombre de la entidad implementadora*</label>
+                  <input
+                    type="text"
+                    [(ngModel)]="proyecto?.implementador.nombre"
+                    name="nombre_entidad"
+                    class="form-control"
+                    placeholder="Ej. Proyecto 1"
+                    required
+                  />
+                </div>
+              </div>
+              <div *ngIf="inversion" class="col-md-4">
+                <div class="form-group">
+                  <label for="">6. Tipo de entidad Implementadora*</label>
+                  <select
+                    name="tipo_entidad"
+                    id="tipo_entidad"
+                    [(ngModel)]="proyecto.implementador.tipo"
+                    class="form-control form-select mt-4"
+                    required
+                  >
+                    <option value="" selected disabled hidden>Escoger</option>
+                    <option
+                      *ngFor="let entidad of tipo_entidad"
+                      [value]="entidad.item"
+                    >
+                      {{ entidad.traduccion }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="inversion" class="col-md-4">
+                <div class="form-group">
+                  <label for="">7. Tipo de Proyecto*</label>
+                  <select
+                    name="tipo_proyecto"
+                    id="tipo_proyecto"
+                    [(ngModel)]="proyecto.tipo"
+                    class="form-control form-select"
+                    required
+                  >
+                    <option value="" selected disabled hidden>Escoger</option>
+                    <option
+                      *ngFor="let tipo of tipo_proyecto"
+                      [value]="tipo.item"
+                    >
+                      {{ tipo.traduccion }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="inversion" class="col-md-4">
+                <div class="form-group">
+                  <label for="">8. Modalidad de Proyecto*</label>
+                  <select
+                    name="modalidad"
+                    id="modalidad"
+                    [(ngModel)]="proyecto.modalidad"
+                    class="form-control form-select"
+                    required
+                  >
+                    <option value="" selected disabled hidden>Escoger</option>
+                    <option
+                      *ngFor="let modalidad of modalidad_proyecto"
+                      [value]="modalidad.item"
+                    >
+                      {{ modalidad.traduccion }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="inversion" class="col-md-4">
+                <div class="row">
+                  <label for=""
+                    >9. Acciones a reconocer por el para el pago por servicio
+                    Ambiental *</label
+                  >
+
+                  <div
+                    *ngFor="let accion of acciones_reconocimiento"
+                    class="col-2 accns"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input csAcc"
+                      id="{{ accion.item }}"
+                      [checked]="listaAcciones.includes(accion.item)"
+                      (change)="changeActionsCheckBoxes(accion, $event)"
+                      value="{{ accion.item }}"
+                    />
+                    <label
+                      class="form-check-label ml-2"
+                      for="{{ accion.item }}"
+                      style="margin-top: -5px"
+                    >
+                      {{ accion.traduccion }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="preinversion" class="row preinversion">
+              <div class="col-md-10 ml-2 cardForm">
+                <h4 class="title-color">Formuladora del Proyecto</h4>
+
+                <p class="my-4">
+                  Agregue las entidades que son formuladoras del proyecto. Puede
+                  ir agregando una o más al presionar el botón "Agregar
+                  Entidad".
+                </p>
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <div class="form-group">
+                      <label for="">5.1 Nombre Entidad</label>
+                      <input
+                        type="text"
+                        name="entidad_selected"
+                        [(ngModel)]="selectedOptionEntidad"
+                        class="form-control"
+                        (keyup)="displaySpanErrorEntidad = false"
+                        maxlength="400"
+                        placeholder="Ej. Nombre entidad"
+                      />
+                      <span
+                        class="form-text text-danger"
+                        *ngIf="displaySpanErrorEntidad"
+                        >Digite una opción válida</span
+                      >
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <button
+                        type="button"
+                        class="btn btn-outline-primary rounded-pill float-end text-uppercase addElementsTable"
+                        (click)="addEntidad()"
+                      >
+                        Agregar Entidad
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <table class="table">
+                  <thead style="background-color: #e6effd">
+                    <tr>
+                      <th style="color: #004884">No</th>
+                      <th style="color: #004884">Nombre Entidad</th>
+                      <th style="color: #004884">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    *ngIf="proyecto?.entidades?.length > 0; else sinEntidades"
+                  >
+                    <tr
+                      *ngFor="let entidad of proyecto.entidades; let i = index"
+                    >
+                      <td>{{ i + 1 }}</td>
+                      <td>
+                        {{ entidad }}
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn rounded-pill removeElementsTable text-uppercase"
+                          (click)="removeEntidad(i)"
+                        >
+                          Eliminar
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <ng-template #sinEntidades>
+                  <tbody>
+                    <tr>
+                      <td colspan="3">
+                        <div class="sinDatos">
+                          <h4>No se han registrado entidades</h4>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <a
+                type="button"
+                routerLink="/proyectos"
+                class="btn btn-secondary rounded-pill mr-4 backEtapa px-3 text-uppercase"
+              >
+                SALIR
+              </a>
+              <button
+                [disabled]="!this.formDatosBasicos.valid || formReady()"
+                class="btn btn-primary rounded-pill text-uppercase nxt"
+              >
+                GUARDAR Y CONTINUAR
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <footer app-footer></footer>
+</div>

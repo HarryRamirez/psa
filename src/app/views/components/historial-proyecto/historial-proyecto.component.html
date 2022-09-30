@@ -1,0 +1,86 @@
+<div class="wrapper background-color-white">
+  <app-header></app-header>
+  <section class="">
+    <div class="background-color-white p-t-25">
+      <div class="p-l-75">
+        <div class="col-12">
+          <h1 class="title-color">Historial</h1>
+          <p>
+            Conozca aquí el historial de su proyecto desde su envío y revsión.
+            Podrá consultar los cambios realizados y la fecha en la que fueron
+            solicitados.
+          </p>
+        </div>
+        <div class="contenido">
+          <div class="col-12">
+            <h3 class="title-color">Estados del proyecto</h3>
+            <p *ngIf="!!this.dtaPro">{{ this.dtaPro.datos_basicos.nombre }}</p>
+            <p *ngIf="!!this.dtaPro == false">Cargando...</p>
+            <p *ngIf="!!arrStatus == false">cargando...</p>
+            <div *ngIf="!!arrStatus" class="hEstados">
+              <div
+                *ngFor="let estados of arrStatus; index as i"
+                class="col-3 col-min"
+              >
+                <div
+                  class="divEstado"
+                  [attr.class]="
+                    estados['estado_despues'] == 'borrador'
+                      ? 'borrador'
+                      : estados['estado_despues'] == 'registrado'
+                      ? 'registrado'
+                      : estados['estado_despues'] == 'revisado'
+                      ? 'revisado'
+                      : estados['estado_despues'] == 'aprobado'
+                      ? 'aprovado'
+                      : 'badge badge-secondary'
+                  "
+                >
+                  <button class="btnStatus">{{ estados.traduccion }}</button>
+                </div>
+                <div>
+                  <p class="divEstado">
+                    {{ estados.tiempo_inicio | date: "yyyy-MM-dd" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <br />
+            <h3 class="title-color">Actividad reciente del proyecto</h3>
+            <p *ngIf="!!arrStatus == false">cargando...</p>
+            <div *ngIf="!!arrStatus" class="detalleActividad">
+              <table class="table mt-5">
+                <thead>
+                  <tr class="th_b_b">
+                    <th class="title-color th_b_b">
+                      <b class="tabTh">Autor</b>
+                    </th>
+                    <th class="title-color th_b_b">
+                      <b class="tabTh">Actividad + Detalle</b>
+                    </th>
+                    <th class="title-color th_b_b">
+                      <b class="tabTh">Fecha y Hora</b>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    class="tr_b_b tr_h_65"
+                    *ngFor="let acciones of arrActions"
+                  >
+                    <td>{{ acciones.autor }}</td>
+                    <td>{{ acciones.actividad_detalle }}</td>
+                    <td>
+                      {{ acciones.fecha_hora | date: "yyyy-MM-dd - h:mm a" }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="margin-top-no-info" app-footer></footer>
+</div>
