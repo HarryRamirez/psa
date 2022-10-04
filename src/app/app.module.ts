@@ -42,6 +42,7 @@ import { VisorComponent } from "./views/components/visor/visor.component";
 import { UploadLocalFileComponent } from "./views/components/upload-local-file/upload-local-file.component";
 import { FilterIntersectionPipe } from "./shared/pipes/filter-intersection.pipe";
 import { RegisterPSAComponent } from './views/components/register-psa/register-psa.component';
+import { TablaComponent } from './views/components/tabla/tabla.component';
 
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
@@ -68,6 +69,7 @@ registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
     VisorComponent,
     UploadLocalFileComponent,
     RegisterPSAComponent,
+    TablaComponent,
   ],
   imports: [
     HttpClientModule,

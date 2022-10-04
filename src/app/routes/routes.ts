@@ -15,6 +15,7 @@ import { ShapesComponent } from "@app/views/components/entidad/shapes/shapes.com
 import { HistorialProyectoComponent } from "../views/components/historial-proyecto/historial-proyecto.component";
 import { VisorGeograficoComponent } from "../views/components/visor-geografico/visor-geografico.component";
 import { RegisterPSAComponent } from "../views/components/register-psa/register-psa.component";
+import { TablaComponent } from '../views/components/tabla/tabla.component';
 
 import {
   Error403Component,
@@ -188,6 +189,10 @@ export const routes: Routes = [
       {
         path: ":idProyecto/financiacion",
         component: FinanciacionComponent,
+      },
+      {
+        path: "tabla",
+        component: TablaComponent,
       },
     ],
   },

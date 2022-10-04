@@ -1,0 +1,112 @@
+<div class="wrapper background-color-white">
+    <app-header></app-header>
+    <app-sidebar class="aside-container"></app-sidebar>
+    <section class="section-container">
+      <div class="content-wrapper background-color-white">
+        <div class="headerContent row">
+          <div class="col-7">
+            <h2 class="title-color mt-2">Usuarios Acutoridad Ambiental</h2>
+          </div>
+        </div>
+        <table class="table mt-5 misProyectosTable" id="tabla1">
+          <thead>
+            <tr
+              class="text-center background-color-blue title-color"
+              style="margin-top: 5px; padding-top: 5px"
+            >
+              <th
+                class="l-h-45"
+                scope="col"
+                sortable="estado"
+                
+              >
+               Nombre entidad
+              </th>
+              <th
+                class="l-h-45"
+                scope="col"
+                sortable="nombre"
+                
+              >
+                Numero de identificacion
+              </th>
+              <th
+                class="l-h-45"
+                scope="col"
+                sortable="id"
+                
+              >
+                Correo Electronico
+              </th>
+              <th
+                class="l-h-45"
+                scope="col"
+                sortable="fecha_registro"
+                
+              >
+              Nombre de Usuario
+              </th>
+              <th class="l-h-45" scope="col" colspan="2">Acciones</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr class="text-center" >
+              <td class="b-l-1 l-h-75">
+                <!-- <strong>
+                </strong> -->
+              </td>
+              <td class="b-rl-0 l-h-75 t-a-l">
+                <!-- <strong>{{ proyecto['nombre'] }}</strong> -->
+              </td>
+              <td class="b-rl-0 l-h-75">
+                <!-- <strong>{{ proyecto['id'] }}</strong> -->
+              </td>
+              <td class="b-rl-0 l-h-75">
+                <!-- {{ proyecto['fecha_registro'] | date: 'yyyy/MM/dd' }} -->
+              </td>
+              <td class="b-rl-0 l-h-75">
+                <!-- <div *ngIf="proyecto['observaciones'] > 0">
+                  <strong>{{ proyecto['correcciones'] }}</strong> /
+                  {{ proyecto['observaciones'] }}
+                </div> -->
+              </td>
+              <td
+                class="b-r-1 l-h-75 t-a-l"
+    
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-primary rounded-pill text-uppercase"
+                >
+                  <strong class="f-s-12">ACEPTAR</strong>
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-outline-danger rounded-pill text-uppercase"
+                >
+                  <strong class="f-s-12">RECHAZAR</strong>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-center p-2"></div> 
+        <span >
+          <h3 class="text-center title-color mt-5">
+            Actualmente usted no cuenta con proyectos registrados en el sistema
+          </h3>
+          <h4 class="text-center description-color mt-3">
+            Si desea registrar su proyecto presione el botón "Registrar Proyecto"
+          </h4>
+        </span>
+      </div>
+    </section>
+    <footer
+      class="margin-top-no-info"
+      app-footer
+     
+    ></footer>
+    <footer app-footer></footer>
+  </div>
+  
