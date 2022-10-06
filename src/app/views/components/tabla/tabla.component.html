@@ -8,7 +8,7 @@
             <h2 class="title-color mt-2">Usuarios Autoridad Ambiental</h2>
           </div>
         </div>
-        <table class="table mt-5 misProyectosTable" id="tabla1">
+        <!-- <table class="table mt-5 misProyectosTable" id="tabla1">
           <thead>
             <tr
               class="text-center background-color-blue title-color"
@@ -50,25 +50,26 @@
             </tr>
           </thead>
           <tbody >
-            <tr class="text-center" >
-              <td class="b-l-1 l-h-75">
-                <!-- <strong>
-                </strong> -->
+            <tr class="text-center" *ngFor="let usuario of usuarios" >
+              <td class="b-l-1 l-h-75" >
+                <strong>
+                {{usuario.nombre}}
+                </strong>
               </td>
               <td class="b-rl-0 l-h-75 t-a-l">
-                <!-- <strong>{{ proyecto['nombre'] }}</strong> -->
+              <strong>{{usuario.id}}</strong> 
               </td>
               <td class="b-rl-0 l-h-75">
-                <!-- <strong>{{ proyecto['id'] }}</strong> -->
+                <strong>{{usuario.traduccion}}</strong> 
               </td>
               <td class="b-rl-0 l-h-75">
-                <!-- {{ proyecto['fecha_registro'] | date: 'yyyy/MM/dd' }} -->
+              {{ usuario.fecha_registro| date: 'yyyy/MM/dd' }} 
               </td>
               <td class="b-rl-0 l-h-75">
-                <!-- <div *ngIf="proyecto['observaciones'] > 0">
+                <div *ngIf="proyecto['observaciones'] > 0">
                   <strong>{{ proyecto['correcciones'] }}</strong> /
                   {{ proyecto['observaciones'] }}
-                </div> -->
+                </div>
               </td>
               <td
                 class="b-r-1 l-h-75 t-a-l"
@@ -90,7 +91,80 @@
               </td>
             </tr>
           </tbody>
+        </table> -->
+        
+        <table class="spacing-table">
+          <thead>
+            <tr>
+              <th
+                scope="col"
+                style="width: 190px"
+                sortable="estado"
+              >
+                Nombre entidad
+              </th>
+              <th
+                scope="col"
+                style="width: 160px"
+                sortable="nombre"
+              >
+                Numero de Identificacion
+              </th>
+              <th 
+              scope="col" 
+              sortable="id"  
+              style="width: 177px"
+              >
+                Correo Electronico
+              </th>
+              <th
+              scope="col" 
+              sortable="fecha_registro"
+              style="width: 170px"
+              >
+                Nombre Usuario
+              </th>
+              <th 
+              scope="col" 
+              style="width: 130px"
+              >
+                Acciones
+            </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuarios">
+              <td style="text-align: left; width: 210px">
+                  {{ usuario["traduccion"] }}
+              </td>
+              <td style="text-align: left; width: 178px">
+                {{ usuario["nombre"] }}
+              </td>
+              <td style="text-align: left ; width: 205px">
+                {{ usuario["id"] }}
+              </td>
+              <td style="text-align: left;  width: 185px">
+                {{ usuario["fecha_registro"] | date: "yyyy/MM/dd" }}
+              </td>
+              <td style="text-align: left; width: 150px">
+                <button
+                type="button"
+                class="btn btn-outline-primary rounded-pill text-uppercase"
+              >
+                <strong class="f-s-12">ACEPTAR</strong>
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-outline-danger rounded-pill text-uppercase"
+              >
+                <strong class="f-s-12">RECHAZAR</strong>
+              </button>
+              </td>
+            </tr>
+          </tbody>
         </table>
+
         <div class="d-flex justify-content-center p-2"></div> 
         <span >
           <h3 class="text-center title-color mt-5">
