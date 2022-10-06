@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tabla.component.scss']
 })
 export class TablaComponent implements OnInit {
-
+public page!: number;
   usuarios: any [] = [
     {
         "estado": "borrador",

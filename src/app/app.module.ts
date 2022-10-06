@@ -44,6 +44,8 @@ import { FilterIntersectionPipe } from "./shared/pipes/filter-intersection.pipe"
 import { RegisterPSAComponent } from './views/components/register-psa/register-psa.component';
 import { TablaComponent } from './views/components/tabla/tabla.component';
 
+import {NgxPaginationModule} from 'ngx-pagination'; 
+
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
 
 @NgModule({
@@ -89,6 +91,7 @@ registerPlugin(FilePondPluginFileValidateType, FilePondPluginFileValidateSize);
     AccordionModule.forRoot(),
     NgxSliderModule,
     TabsModule.forRoot(),
+    NgxPaginationModule,
   ],
   exports: [EntidadComponent],
   bootstrap: [AppComponent],

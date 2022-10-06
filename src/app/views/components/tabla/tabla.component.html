@@ -133,7 +133,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios">
+            <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page }">
               <td style="text-align: left; width: 210px">
                   {{ usuario["traduccion"] }}
               </td>
@@ -164,6 +164,14 @@
             </tr>
           </tbody>
         </table>
+
+        <pagination-controls 
+        class="pagination"
+        (pageChange)="page = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+        >
+        </pagination-controls>
 
         <div class="d-flex justify-content-center p-2"></div> 
         <span >
