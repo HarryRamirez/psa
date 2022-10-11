@@ -8,7 +8,7 @@
           <h2 class="title-color mt-2">Proyectos de las Entidades</h2>
         </div>
       </div>
-      <table class="table mt-5 misProyectosTable" id="tabla1">
+      <!-- <table class="table mt-5 misProyectosTable" id="tabla1">
         <thead>
           <tr
             class="text-center background-color-blue title-color"
@@ -121,7 +121,97 @@
             </td>
           </tr>
         </tbody>
+      </table> -->
+      <table class="spacing-table">
+        <thead>
+          <tr>
+            <th
+              scope="col"
+              style="width: 150px"
+              sortable="estado"
+            >
+              Estado
+            </th>
+            <th
+              scope="col"
+              style="width: 160px"
+              sortable="nombre"
+            >
+            Nombre proyecto
+            </th>
+            <th 
+            scope="col" 
+            sortable="id"  
+            style="width: 162px"
+            >
+            ID de Proyecto
+            </th>
+            <th
+            scope="col" 
+            sortable="fecha_registro"
+            style="width: 170px"
+            >
+            Fecha de Registro
+            </th>
+            <th
+            scope="col" 
+            sortable="fecha_registro"
+            style="width: 155px"
+            >
+            Correcciones / Observaciones
+            </th>
+            <th 
+            scope="col" 
+            style="width: 130px"
+            >
+              Acciones
+          </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: page }">
+            <td style="text-align: left; width: 152px">
+                {{ usuario["traduccion"] }}
+            </td>
+            <td style="text-align: left; width: 170px">
+              {{ usuario["nombre"] }}
+            </td>
+            <td style="text-align: left ; width: 155px">
+              {{ usuario["id"] }}
+            </td>
+            <td style="text-align: left;  width: 175px">
+              {{ usuario["fecha_registro"] | date: "yyyy/MM/dd" }}
+            </td>
+            <td style="text-align: left; width: 128px">
+              {{ usuario["correcciones"] }}
+              {{ usuario["observaciones"] }}
+            </td>
+            <td style="text-align: left; width: 150px">
+              <button
+              type="button"
+              class="btn btn-outline-primary rounded-pill text-uppercase"
+            >
+              <strong class="f-s-12">ACEPTAR</strong>
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-danger rounded-pill text-uppercase"
+            >
+              <strong class="f-s-12">RECHAZAR</strong>
+            </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
+      <pagination-controls 
+        class="pagination"
+        (pageChange)="page = $event"
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+        >
+        </pagination-controls>
+
       <div class="d-flex justify-content-center p-2" *ngIf="mostrarTabla"></div>
       <span *ngIf="!mostrarTabla">
         <h3 class="text-center title-color mt-5">

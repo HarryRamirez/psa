@@ -184,3 +184,145 @@ th[sortable].desc:before {
   border-radius: 0.2rem;
   padding: 0.42rem 1.2rem;
 }
+
+// *************************************************** CAMBIOS DE LA TABLA AUTORIDAD
+button.btnAdd {
+  background-color: #3366cc;
+}
+.btn{
+  width: 110%;
+}
+
+
+
+table {
+  border-collapse: separate;
+  border-spacing: 0px 10px;
+}
+
+th {
+  border: 1px solid #e6effd;
+}
+
+td {
+  border: 1px solid #e6effd;
+}
+
+th[sortable] {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+th[sortable].desc:before,
+th[sortable].asc:before {
+  content: "";
+  display: block;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAmxJREFUeAHtmksrRVEUx72fH8CIGQNJkpGUUmakDEiZSJRIZsRQmCkTJRmZmJgQE0kpX0D5DJKJgff7v+ru2u3O3vvc67TOvsdatdrnnP1Y///v7HvvubdbUiIhBISAEBACQkAICAEhIAQ4CXSh2DnyDfmCPEG2Iv9F9MPlM/LHyAecdyMzHYNwR3fdNK/OH9HXl1UCozD24TCvILxizEDWIEzA0FcM8woCgRrJCoS5PIwrANQSMAJX1LEI9bqpQo4JYNFFKRSvIgsxHDVnqZgIkPnNBM0rIGtYk9YOOsqgbgepRCfdbmFtqhFkVEDVPjJp0+Z6e6hRHhqBKgg6ZDCvYBygVmUoEGoh5JTRvIJwhJo1aUOoh4CLPMyvxxi7EWOMgnCGsXXI1GIXlZUYX7ucU+kbR8NW8lh3O7cue0Pk32MKndfUxQFAwxdirk3fHappAnc0oqDPzDfGTBrCfHP04dM4oTV8cxr0SVzH9FF07xD3ib6xCDE+M+aUcVygtWzzbtGX2rPBrEUYfecfQkaFzYi6HjVnGBdtL7epqAlc1+jRdAap74RrnPc4BCijttY2tRcdN0g17w7HqZrXhdJTYAuS3hd8z+vKgK3V1zWPae0mZDMykadBn1hTQBLnZNwVrJpSe/NwEeDsEwCctEOsJTsgxLvCqUl2ACftEGvJDgjxrnBqkh3ASTvEWrIDQrwrnJpkB3DSDrGW7IAQ7wqnJtkBnLRztejXXVu4+mxz/nQ9jR1w5VB86ejLTFcnnDwhzV+F6T+CHZlx6THSjn76eyyBIOPHyDakhBAQAkJACAgBISAEhIAQYCLwC8JxpAmsEGt6AAAAAElFTkSuQmCC")
+    no-repeat;
+  background-size: 22px;
+  width: 22px;
+  height: 22px;
+  float: left;
+  margin-left: -5px;
+}
+
+th[sortable].desc:before {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+}
+
+.badge {
+  border-radius: 0.2rem;
+  padding: 0.42rem 1.2rem;
+}
+
+.l-h-45 {
+  line-height: 45px;
+}
+.l-h-75 {
+  line-height: 75px;
+}
+
+.b-rl-0 {
+  border-right: 0px;
+  border-left: 0px;
+  padding: 0px;
+}
+
+.b-r-1 {
+  border-left: 0px;
+  border-right: 1px solid #e6effd;
+  border-radius: 0px 15px 15px 0px;
+  padding: 0px;
+}
+
+.b-l-1 {
+  border-left: 1px solid #e6effd;
+  border-right: 0px;
+  border-radius: 15px 0px 0px 15px;
+  padding: 0px;
+}
+
+.f-s-12 {
+  font-size: 12px;
+}
+
+.t-a-l {
+  text-align: left;
+}
+
+.mar-tab-5 {
+  margin: 5px;
+}
+
+.spacing-table {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 15px;
+  border-collapse: separate;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0 5px; /* this is the ultimate fix */
+}
+.spacing-table th {
+  text-align: left;
+  padding: 5px 10px;
+  background-color: #e6effd;
+  border-color: #e6effd;
+  color: #004884;
+}
+.spacing-table td {
+  border-width: 1px 0;
+  width: 50%;
+  border-color: #e6effd;
+  border-style: solid;
+  background-color: white;
+  color: #4b4b4b;
+  padding: 5px 12px;
+}
+.spacing-table td:first-child {
+  border-left-width: 1px;
+  border-radius: 5px 0 0 5px;
+}
+.spacing-table td:last-child {
+  border-right-width: 1px;
+  border-radius: 0 5px 5px 0;
+}
+.spacing-table thead {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.spacing-table tbody {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0 10px;
+}
+.spacing-table tr:hover td:nth-of-type(1n) {
+  border-color: #3366cb;
+}
+.pagination{
+  margin-left: 290px;
+}
+
